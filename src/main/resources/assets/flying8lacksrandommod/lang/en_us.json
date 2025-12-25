@@ -1,0 +1,15 @@
+{
+  "itemGroup.flying8lacksrandommod": "Example Mod Tab",
+  "block.flying8lacksrandommod.example_block": "Example Block",
+  "block.flying8lacksrandommod.h_elevator": "Horizontal Elevator",
+  "item.flying8lacksrandommod.example_item": "Example Item",
+
+
+  "flying8lacksrandommod.configuration.title": "flying_8lack's random mod Configs",
+  "flying8lacksrandommod.configuration.section.flying8lacksrandommod.common.toml": "flying_8lack's random mod Configs",
+  "flying8lacksrandommod.configuration.section.flying8lacksrandommod.common.toml.title": "flying_8lack's random mod Configs",
+  "flying8lacksrandommod.configuration.items": "Item List",
+  "flying8lacksrandommod.configuration.logDirtBlock": "Log Dirt Block",
+  "flying8lacksrandommod.configuration.magicNumberIntroduction": "Magic Number Text",
+  "flying8lacksrandommod.configuration.magicNumber": "Magic Number"
+}
