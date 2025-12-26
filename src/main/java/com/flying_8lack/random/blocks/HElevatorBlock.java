@@ -16,8 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
-import static com.flying_8lack.random.main.flying8lacksrandommod.lg;
-
 
 public class HElevatorBlock extends Block implements EntityBlock {
     public HElevatorBlock(Properties properties) {
@@ -47,7 +45,6 @@ public class HElevatorBlock extends Block implements EntityBlock {
         return new HElevatorBlockEntity(blockPos, blockState);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return type == ModBlockEntity.H_ELEVATOR_BE.get()? HElevatorBlockEntity::tick: null;

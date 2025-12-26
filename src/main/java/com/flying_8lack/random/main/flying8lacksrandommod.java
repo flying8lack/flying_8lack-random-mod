@@ -121,9 +121,8 @@ public class flying8lacksrandommod {
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
-    public void onServerStarting(ServerChatEvent event) {
+    public void onChatEvent(ServerChatEvent event) {
         // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
         if (event.getRawText().contains("joke")){
             event.getPlayer().getInventory().add(new ItemStack(Items.DIRT));
         }
@@ -135,6 +134,8 @@ public class flying8lacksrandommod {
     @SubscribeEvent
     public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
 
+        if(Config.GIVE_SHOVEL_AT_START.isFalse()) return;
+
         LOGGER.info("Gave {} a shovel!", event.getEntity().getName());
         int number = event.getEntity().getData(ModData.SHOVELS);
         Player player = event.getEntity();
@@ -145,7 +146,6 @@ public class flying8lacksrandommod {
             case 0:
                 event.getEntity().getInventory().add(new ItemStack(Items.DIAMOND_SHOVEL));
                 player.setData(ModData.SHOVELS, player.getData(ModData.SHOVELS) + 1);
-
                 break;
             case 1:
                 event.getEntity().getInventory().add(new ItemStack(Items.IRON_SHOVEL));
