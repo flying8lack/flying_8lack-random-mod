@@ -23,13 +23,6 @@ public class HElevatorBlock extends Block implements EntityBlock {
     }
 
 
-    @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if(level.getBlockEntity(pos) instanceof HElevatorBlockEntity be){
-            be.resetTarget();
-        }
-        return super.useWithoutItem(state, level, pos, player, hitResult);
-    }
 
     @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
@@ -38,6 +31,14 @@ public class HElevatorBlock extends Block implements EntityBlock {
             be.teleport(entity, level);
         }
 
+    }
+
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if(level.getBlockEntity(pos) instanceof HElevatorBlockEntity be){
+            be.removeLink(level);
+            be.resetTarget();
+        }
     }
 
     @Override

@@ -1,14 +1,23 @@
 package com.flying_8lack.random.blockentity;
 
 import com.flying_8lack.random.main.ModBlockEntity;
+import net.minecraft.client.gui.components.ChatComponent;
+import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.ChatType;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.OutgoingChatMessage;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+
+import static com.flying_8lack.random.main.flying8lacksrandommod.lg;
 
 public class HElevatorBlockEntity extends BlockEntity {
 
@@ -21,8 +30,15 @@ public class HElevatorBlockEntity extends BlockEntity {
 
     }
 
+    public void removeLink(Level level){
+        if(this.target == null) return;
+        if(level.getBlockEntity(this.target) instanceof HElevatorBlockEntity be){
+            be.resetTarget();
+        }
+    }
+
     public void coolDown(){
-        this.cooldown = 20*6;
+        this.cooldown = 20*5;
     }
 
     public void resetTarget(){
@@ -51,18 +67,21 @@ public class HElevatorBlockEntity extends BlockEntity {
     public void search(Level level, Entity entity){
         BlockPos init = this.getBlockPos();
         this.target = null;
-        Direction.Axis a = entity.getDirection().getAxis();
-        for(int i = -31; i < 32; i++){
-            if(i == 0) continue;
-            if (level.getBlockEntity(init.relative(a, i)) instanceof HElevatorBlockEntity b){
+        Direction a = entity.getDirection();
+        Vec3i directionView = new Vec3i(a.getStepX(), a.getStepY(), a.getStepZ());
+        for(int i = 1; i < 32; i++){
+            if (level.getBlockEntity(init.offset(directionView.multiply(i))) instanceof HElevatorBlockEntity b){
                 if (b.target == null) {
-                    this.target = init.relative(a, i);
+                    this.target = init.offset(directionView.multiply(i));
                     b.target = this.getBlockPos();
                     break;
                 }
             }
         }
 
+        if(this.target == null && entity instanceof Player p){
+            p.displayClientMessage(Component.literal("No target elevator was found in that direction"),true);
+        }
 
     }
 
