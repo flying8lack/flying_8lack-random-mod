@@ -78,6 +78,8 @@ public class flying8lacksrandommod {
         modEventBus.addListener(this::commonSetup);
         ModData.ATTACHMENT_TYPES.register(modEventBus);
 
+        ModEffect.ME.register(modEventBus);
+
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
