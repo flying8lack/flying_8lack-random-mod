@@ -2,12 +2,14 @@ package com.flying_8lack.random.effect;
 
 import com.flying_8lack.random.entity.FigEntity;
 import com.flying_8lack.random.main.ModEntity;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.level.Level;
@@ -29,13 +31,9 @@ public class FigificationEffect extends MobEffect {
         if(livingEntity.getRandom().nextInt(0, 100) < 20){
 
             Level level = livingEntity.level();
-            Creeper f = new Creeper(EntityType.CREEPER, level);
+            //FigEntity f = new FigEntity(ModEntity.FIG_ENTITY.get(), level);
+            ModEntity.FIG_ENTITY.get().spawn((ServerLevel) level, livingEntity.getOnPos().above(), MobSpawnType.MOB_SUMMONED);
 
-            f.moveTo(livingEntity.getOnPos().above().getCenter());
-
-            lg().debug("Sent a creeper to player {}", f.blockPosition());
-
-            level.addFreshEntity(f);
             this.amount += 1;
 
 

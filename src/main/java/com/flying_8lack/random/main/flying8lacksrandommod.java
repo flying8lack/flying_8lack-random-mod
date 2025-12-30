@@ -7,9 +7,12 @@ import net.minecraft.network.chat.OutgoingChatMessage;
 import net.minecraft.network.chat.PlayerChatMessage;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.event.ServerChatEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import org.slf4j.Logger;
 
@@ -79,6 +82,7 @@ public class flying8lacksrandommod {
         ModData.ATTACHMENT_TYPES.register(modEventBus);
 
         ModEffect.ME.register(modEventBus);
+        ModEntity.ET.register(modEventBus);
 
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
@@ -130,6 +134,7 @@ public class flying8lacksrandommod {
         }
 
     }
+
 
 
 
