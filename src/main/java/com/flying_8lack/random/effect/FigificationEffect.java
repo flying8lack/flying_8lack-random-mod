@@ -19,7 +19,7 @@ import static com.flying_8lack.random.main.flying8lacksrandommod.lg;
 
 public class FigificationEffect extends MobEffect {
 
-    public int amount = 0;
+
     public FigificationEffect(int color) {
         super(MobEffectCategory.HARMFUL, color);
     }
@@ -30,13 +30,17 @@ public class FigificationEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
-        if(livingEntity.getRandom().nextInt(0, 100) < 20){
+        if(livingEntity.getRandom().nextInt(0, 100) < 10){
 
             Level level = livingEntity.level();
             //FigEntity f = new FigEntity(ModEntity.FIG_ENTITY.get(), level);
-            ModEntity.FIG_ENTITY.get().spawn((ServerLevel) level, livingEntity.getOnPos().above(), MobSpawnType.MOB_SUMMONED);
+            if(level instanceof ServerLevel sr) {
+                FigEntity f = ModEntity.FIG_ENTITY.get().spawn(sr, livingEntity.getOnPos().above(), MobSpawnType.MOB_SUMMONED);
+                if (f != null) {
+                    f.setTarget(livingEntity);
+                }
+            }
 
-            this.amount += 1;
 
 
         }
@@ -45,6 +49,8 @@ public class FigificationEffect extends MobEffect {
 
     @Override
     public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-        return this.amount < 3*amplifier && duration % 16 == 0;
+        return duration % 20 == 0;
     }
+
+
 }

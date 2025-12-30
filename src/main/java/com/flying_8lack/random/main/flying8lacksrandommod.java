@@ -12,7 +12,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.alchemy.Potions;
 import net.neoforged.neoforge.event.ServerChatEvent;
+import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import org.slf4j.Logger;
@@ -175,6 +178,21 @@ public class flying8lacksrandommod {
 
         }
 
+    }
 
+    @SubscribeEvent // on the game event bus
+    public void registerBrewingRecipes(RegisterBrewingRecipesEvent event) {
+        // Gets the builder to add recipes to
+        PotionBrewing.Builder builder = event.getBuilder();
+
+                // Will add brewing recipes for all container potions (e.g. potion, splash potion, lingering potion)
+                        builder.addMix(
+                        // The initial potion to apply to
+                        Potions.AWKWARD,
+                        // The brewing ingredient. This is the item at the top of the brewing stand.
+                        ModItem.FIG_FOOD.asItem(),
+                        // The resulting potion
+                        ModPotions.FIGIFICATION
+                );
     }
 }
