@@ -1,6 +1,7 @@
 package com.flying_8lack.random.main;
 
 import com.flying_8lack.random.data.ModData;
+import com.flying_8lack.random.items.potions.ModPotions;
 import com.flying_8lack.random.util.BuildUtil;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.OutgoingChatMessage;
@@ -80,6 +81,8 @@ public class flying8lacksrandommod {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
         ModData.ATTACHMENT_TYPES.register(modEventBus);
+
+        ModPotions.POTION.register(modEventBus);
 
         ModEffect.ME.register(modEventBus);
         ModEntity.ET.register(modEventBus);

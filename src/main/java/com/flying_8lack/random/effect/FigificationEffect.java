@@ -26,6 +26,8 @@ public class FigificationEffect extends MobEffect {
 
 
 
+
+
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
         if(livingEntity.getRandom().nextInt(0, 100) < 20){
