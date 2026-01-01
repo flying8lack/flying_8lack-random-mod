@@ -16,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.ItemStackHandler;
 
 import static com.flying_8lack.random.main.flying8lacksrandommod.lg;
 
@@ -23,11 +24,16 @@ public class HElevatorBlockEntity extends BlockEntity {
 
     private BlockPos target = null;
     private int cooldown = 0;
+    private final ItemStackHandler upgrade = new ItemStackHandler();
 
 
     public HElevatorBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntity.H_ELEVATOR_BE.get(), pos, blockState);
 
+    }
+
+    public ItemStackHandler getUpgrade(){
+        return upgrade;
     }
 
     public void removeLink(Level level){
@@ -93,6 +99,7 @@ public class HElevatorBlockEntity extends BlockEntity {
             tag.putInt("target_y", target.getY());
             tag.putInt("target_z", target.getZ());
         }
+        tag.put("upgrades", this.upgrade.serializeNBT(registries));
 
     }
 
@@ -106,6 +113,8 @@ public class HElevatorBlockEntity extends BlockEntity {
         target = new BlockPos(tag.getInt("target_x"),
                 tag.getInt("target_y"),
                 tag.getInt("target_z"));
+
+        upgrade.deserializeNBT(registries, tag.getCompound("upgrades"));
 
     }
 
