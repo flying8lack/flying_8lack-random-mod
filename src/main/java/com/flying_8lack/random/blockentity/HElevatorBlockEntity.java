@@ -1,6 +1,7 @@
 package com.flying_8lack.random.blockentity;
 
 import com.flying_8lack.random.main.ModBlockEntity;
+import com.flying_8lack.random.menu.HElevatorMenu;
 import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.core.BlockPos;
@@ -11,16 +12,20 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.OutgoingChatMessage;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import org.jetbrains.annotations.Nullable;
 
-import static com.flying_8lack.random.main.flying8lacksrandommod.lg;
 
-public class HElevatorBlockEntity extends BlockEntity {
+
+public class HElevatorBlockEntity extends BlockEntity implements MenuProvider {
 
     private BlockPos target = null;
     private int cooldown = 0;
@@ -106,6 +111,9 @@ public class HElevatorBlockEntity extends BlockEntity {
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
+
+        upgrade.deserializeNBT(registries, tag.getCompound("upgrades"));
+
         if(!(tag.contains("target_x") && tag.contains("target_z"))){
             return;
         }
@@ -114,7 +122,7 @@ public class HElevatorBlockEntity extends BlockEntity {
                 tag.getInt("target_y"),
                 tag.getInt("target_z"));
 
-        upgrade.deserializeNBT(registries, tag.getCompound("upgrades"));
+
 
     }
 
@@ -126,5 +134,15 @@ public class HElevatorBlockEntity extends BlockEntity {
                 be.cooldown -= 1;
             }
         }
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return Component.literal("J");
+    }
+
+    @Override
+    public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        return new HElevatorMenu(i, inventory, this, this.upgrade);
     }
 }

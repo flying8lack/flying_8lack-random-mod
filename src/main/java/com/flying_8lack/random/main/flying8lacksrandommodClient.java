@@ -25,13 +25,6 @@ public class flying8lacksrandommodClient {
     }
 
     @SubscribeEvent
-    static void onClientSetup(FMLClientSetupEvent event) {
-        // Some client setup code
-        flying8lacksrandommod.LOGGER.info("HELLO FROM CLIENT SETUP");
-        flying8lacksrandommod.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-    }
-
-    @SubscribeEvent
     static void onClientSetup(RegisterMenuScreensEvent event) {
         event.register(ModMenu.H_ELEVATOR_MENU.get(),
                 HElevatorScreen::new);

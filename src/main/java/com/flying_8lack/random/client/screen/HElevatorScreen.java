@@ -31,7 +31,7 @@ public class HElevatorScreen extends AbstractContainerScreen<HElevatorMenu> {
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         super.renderLabels(guiGraphics, mouseX, mouseY);
 
-        guiGraphics.drawString(this.font, "Hello World!", 65, 65, 0xFF404040, false);
+        guiGraphics.drawString(this.font, "Hello World!", 32, 32, 0xFF404040, false);
     }
 
     @Override

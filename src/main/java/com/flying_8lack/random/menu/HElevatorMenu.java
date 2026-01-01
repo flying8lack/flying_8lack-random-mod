@@ -2,29 +2,29 @@ package com.flying_8lack.random.menu;
 
 import com.flying_8lack.random.main.ModBlock;
 import com.flying_8lack.random.main.ModMenu;
-import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
-import org.jetbrains.annotations.Nullable;
 
 public class HElevatorMenu extends AbstractContainerMenu {
 
-    public ContainerLevelAccess access;
-    public HElevatorMenu(int containerId, Inventory playinv) {
-        this(containerId, playinv, ContainerLevelAccess.NULL,  new ItemStackHandler(1));
+    public BlockEntity be;
+
+    public HElevatorMenu(int containerId, Inventory inv, FriendlyByteBuf extradata) {
+        this(containerId, inv, inv.player.level().getBlockEntity(extradata.readBlockPos()), new ItemStackHandler(1) );
     }
 
-    public HElevatorMenu(int containerId, Inventory playinv, ContainerLevelAccess access, IItemHandler dataInventory) {
+    public HElevatorMenu(int containerId, Inventory playinv, BlockEntity be, ItemStackHandler upgrades) {
         super(ModMenu.H_ELEVATOR_MENU.get(), containerId);
-        this.access = access;
-        this.addSlot(new SlotItemHandler(dataInventory, 0, 0, 0));
+        this.addSlot(new SlotItemHandler(upgrades , 0, 0, 0));
+
+        this.be = be;
+
 
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 9; j++) {
@@ -42,7 +42,7 @@ public class HElevatorMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return AbstractContainerMenu.stillValid(this.access, player, ModBlock.H_ELEVATOR.get());
+        return AbstractContainerMenu.stillValid(ContainerLevelAccess.NULL, player, ModBlock.H_ELEVATOR.get());
     }
 
     // Assume we have a data inventory of size 5
@@ -75,7 +75,7 @@ public class HElevatorMenu extends AbstractContainerMenu {
             // If the quick move was performed on the data inventory result slot
             if (quickMovedSlotIndex == 0) {
                 // Try to move the result slot into the player inventory/hotbar
-                if (!this.moveItemStackTo(rawStack, 5, 41, true)) {
+                if (!this.moveItemStackTo(rawStack, 1, 37, true)) {
                     // If cannot move, no longer quick move
                     return ItemStack.EMPTY;
                 }
@@ -84,25 +84,25 @@ public class HElevatorMenu extends AbstractContainerMenu {
                 quickMovedSlot.onQuickCraft(rawStack, quickMovedStack);
             }
             // Else if the quick move was performed on the player inventory or hotbar slot
-            else if (quickMovedSlotIndex >= 5 && quickMovedSlotIndex < 41) {
+            else if (quickMovedSlotIndex >= 1 && quickMovedSlotIndex < 37) {
                 // Try to move the inventory/hotbar slot into the data inventory input slots
-                if (!this.moveItemStackTo(rawStack, 1, 5, false)) {
+                if (!this.moveItemStackTo(rawStack, 0, 1, false)) {
                     // If cannot move and in player inventory slot, try to move to hotbar
                     if (quickMovedSlotIndex < 32) {
-                        if (!this.moveItemStackTo(rawStack, 32, 41, false)) {
+                        if (!this.moveItemStackTo(rawStack, 32, 37, false)) {
                             // If cannot move, no longer quick move
                             return ItemStack.EMPTY;
                         }
                     }
                     // Else try to move hotbar into player inventory slot
-                    else if (!this.moveItemStackTo(rawStack, 5, 32, false)) {
+                    else if (!this.moveItemStackTo(rawStack, 5, 37, false)) {
                         // If cannot move, no longer quick move
                         return ItemStack.EMPTY;
                     }
                 }
             }
             // Else if the quick move was performed on the data inventory input slots, try to move to player inventory/hotbar
-            else if (!this.moveItemStackTo(rawStack, 5, 41, false)) {
+            else if (!this.moveItemStackTo(rawStack, 5, 37, false)) {
                 // If cannot move, no longer quick move
                 return ItemStack.EMPTY;
             }

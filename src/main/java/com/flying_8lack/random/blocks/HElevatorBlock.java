@@ -2,7 +2,6 @@ package com.flying_8lack.random.blocks;
 
 import com.flying_8lack.random.blockentity.HElevatorBlockEntity;
 import com.flying_8lack.random.main.ModBlockEntity;
-import com.flying_8lack.random.menu.HElevatorMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,8 +17,9 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 
 public class HElevatorBlock extends Block implements EntityBlock {
@@ -29,12 +29,12 @@ public class HElevatorBlock extends Block implements EntityBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        Optional<HElevatorBlockEntity> m = level.getBlockEntity(pos, ModBlockEntity.H_ELEVATOR_BE.get());
+        if(m.isEmpty()) return InteractionResult.SUCCESS;
+
 
         if(!level.isClientSide() && player instanceof ServerPlayer sp){
-            sp.openMenu(new SimpleMenuProvider(
-                    (containerId, playerInventory, pl) -> new HElevatorMenu(containerId, playerInventory),
-                    Component.literal("Window")
-            ));
+            sp.openMenu(new SimpleMenuProvider(m.get(), Component.literal("Windows")), pos);
         }
         return InteractionResult.SUCCESS;
     }
