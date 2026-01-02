@@ -34,7 +34,7 @@ public class HElevatorBlock extends Block implements EntityBlock {
 
 
         if(!level.isClientSide() && player instanceof ServerPlayer sp){
-            sp.openMenu(new SimpleMenuProvider(m.get(), Component.literal("Windows")), pos);
+            sp.openMenu(new SimpleMenuProvider(m.get(), Component.literal("Horizontal Elevator")), pos);
         }
         return InteractionResult.SUCCESS;
     }

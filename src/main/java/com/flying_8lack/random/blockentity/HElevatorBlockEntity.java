@@ -33,7 +33,12 @@ public class HElevatorBlockEntity extends BlockEntity implements MenuProvider {
     private BlockPos target = null;
     private int cooldown = 0;
     private boolean teleporting = false;
-    private final ItemStackHandler upgrade = new ItemStackHandler();
+    private final ItemStackHandler upgrade = new ItemStackHandler(){
+        @Override
+        public boolean isItemValid(int slot, ItemStack stack) {
+            return stack.getItem() instanceof AbstractUpgradeItem;
+        }
+    };
 
     public void setTeleporting(boolean b){
         this.teleporting = b;

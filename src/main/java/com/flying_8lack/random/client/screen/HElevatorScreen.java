@@ -21,11 +21,17 @@ public class HElevatorScreen extends AbstractContainerScreen<HElevatorMenu> {
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
 
+        this.renderTooltip(guiGraphics, mouseX, mouseY);
+
     }
+
+
 
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         super.renderLabels(guiGraphics, mouseX, mouseY);
+
+
 
         //guiGraphics.drawString(this.font, "Hello World!", 40, 20, 0xFF404040, false);
     }

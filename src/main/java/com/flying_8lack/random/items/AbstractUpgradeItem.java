@@ -11,7 +11,7 @@ public abstract class AbstractUpgradeItem extends Item {
         super(new Item.Properties().stacksTo(1));
     }
 
-    public abstract void preOperation(Entity entity, Level level);
+    public abstract int rangeReduction(Entity entity, Level level);
     public abstract void postOperation(Entity entity, Level level);
 
 
