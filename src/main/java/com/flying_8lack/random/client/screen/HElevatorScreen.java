@@ -1,22 +1,18 @@
 package com.flying_8lack.random.client.screen;
 
 import com.flying_8lack.random.menu.HElevatorMenu;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.font.FontSet;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 
 import static com.flying_8lack.random.main.flying8lacksrandommod.MODID;
 
 public class HElevatorScreen extends AbstractContainerScreen<HElevatorMenu> {
 
-    private static final ResourceLocation BACKGROUND_LOCATION = ResourceLocation.fromNamespaceAndPath(MODID, "textures/gui/container/my_container_screen.png");
+    private static final ResourceLocation BACKGROUND_LOCATION = ResourceLocation.fromNamespaceAndPath(MODID,
+            "textures/gui/container/h_elevator_screen.png");
     public HElevatorScreen(HElevatorMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
     }
@@ -31,7 +27,7 @@ public class HElevatorScreen extends AbstractContainerScreen<HElevatorMenu> {
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         super.renderLabels(guiGraphics, mouseX, mouseY);
 
-        guiGraphics.drawString(this.font, "Hello World!", 32, 32, 0xFF404040, false);
+        //guiGraphics.drawString(this.font, "Hello World!", 40, 20, 0xFF404040, false);
     }
 
     @Override

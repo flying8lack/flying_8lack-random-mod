@@ -21,7 +21,7 @@ public class HElevatorMenu extends AbstractContainerMenu {
 
     public HElevatorMenu(int containerId, Inventory playinv, BlockEntity be, ItemStackHandler upgrades) {
         super(ModMenu.H_ELEVATOR_MENU.get(), containerId);
-        this.addSlot(new SlotItemHandler(upgrades , 0, 0, 0));
+        this.addSlot(new SlotItemHandler(upgrades , 0, 56, 35));
 
         this.be = be;
 
@@ -30,12 +30,12 @@ public class HElevatorMenu extends AbstractContainerMenu {
             for(int j = 0; j < 9; j++) {
                 int jk = 8-j;
                 int ik = 3-i;
-                this.addSlot(new Slot(playinv, (jk+ik*9), jk*18+8, ik*18+8+64));
+                this.addSlot(new Slot(playinv, (jk+ik*9), jk*18+8, ik*18+2+64));
             }
         }
 
         for(int i = 0; i < 9; i++) {
-            this.addSlot(new Slot(playinv, i, i*18+8, 4*18+8+64));
+            this.addSlot(new Slot(playinv, i, i*18+8, 4*18+6+64));
         }
 
     }
