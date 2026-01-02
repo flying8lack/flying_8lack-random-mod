@@ -1,6 +1,8 @@
 package com.flying_8lack.random.blockentity;
 
+import com.flying_8lack.random.items.AbstractUpgradeItem;
 import com.flying_8lack.random.main.ModBlockEntity;
+import com.flying_8lack.random.main.ModItem;
 import com.flying_8lack.random.menu.HElevatorMenu;
 import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -17,6 +19,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -29,8 +32,12 @@ public class HElevatorBlockEntity extends BlockEntity implements MenuProvider {
 
     private BlockPos target = null;
     private int cooldown = 0;
+    private boolean teleporting = false;
     private final ItemStackHandler upgrade = new ItemStackHandler();
 
+    public void setTeleporting(boolean b){
+        this.teleporting = b;
+    }
 
     public HElevatorBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntity.H_ELEVATOR_BE.get(), pos, blockState);
@@ -57,17 +64,28 @@ public class HElevatorBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public void teleport(Entity entity, Level level){
-        if(cooldown > 0) return;
+        if(this.cooldown > 0 || this.teleporting) return;
 
         if(target == null){
             this.search(this.getLevel(), entity);
             return;
         }
+        ItemStack upg = this.upgrade.getStackInSlot(0);
+
+
         if(level.getBlockEntity(target) instanceof HElevatorBlockEntity be) {
             entity.setShiftKeyDown(false);
-            this.coolDown();
             be.coolDown();
+            this.coolDown();
+            be.setTeleporting(true);
             entity.moveTo(target.above().getBottomCenter());
+            if(!upg.isEmpty() && upg.getItem() instanceof AbstractUpgradeItem u){
+                u.postOperation(entity, level);
+
+            }
+            be.setTeleporting(false);
+
+
         } else {
             //no longer exists
             this.resetTarget();
@@ -130,7 +148,7 @@ public class HElevatorBlockEntity extends BlockEntity implements MenuProvider {
 
     public static <T extends BlockEntity> void tick(Level level, BlockPos blockPos, BlockState blockState, T t) {
         if(t instanceof HElevatorBlockEntity be){
-            if(be.cooldown > 0){
+            if(be.cooldown > 0 && !be.teleporting){
                 be.cooldown -= 1;
             }
         }

@@ -71,6 +71,7 @@ public class flying8lacksrandommod {
             .icon(() -> ModBlock.H_ELEVATOR_ITEM.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(H_ELEVATOR.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
+                output.accept(ModItem.POST_PROTECTION_UPGRADE_ITEM);
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
