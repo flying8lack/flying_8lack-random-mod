@@ -17,5 +17,11 @@ public class ModBus {
                 (be, d) -> be.getUpgrade()
         );
 
+        event.registerBlockEntity(
+                Capabilities.ItemHandler.BLOCK,
+                ModBlockEntity.SILLY_MINER_BE.get(),
+                (be, d) -> be.getInv()
+        );
+
     }
 }
