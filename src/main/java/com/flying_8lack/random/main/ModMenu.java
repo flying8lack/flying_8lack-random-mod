@@ -1,6 +1,7 @@
 package com.flying_8lack.random.main;
 
 import com.flying_8lack.random.menu.HElevatorMenu;
+import com.flying_8lack.random.menu.SillyMinerMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
@@ -17,4 +18,7 @@ public class ModMenu {
 
     public static final Supplier<MenuType<HElevatorMenu>> H_ELEVATOR_MENU = MENU.register("h_elevator_menu",
             () -> IMenuTypeExtension.create(HElevatorMenu::new));
+
+    public static final Supplier<MenuType<SillyMinerMenu>> SILLY_MINER_MENU = MENU.register("silly_miner_menu",
+            () -> IMenuTypeExtension.create(SillyMinerMenu::new));
 }

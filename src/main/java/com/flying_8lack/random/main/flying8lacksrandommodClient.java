@@ -1,6 +1,7 @@
 package com.flying_8lack.random.main;
 
 import com.flying_8lack.random.client.screen.HElevatorScreen;
+import com.flying_8lack.random.client.screen.SillyMinerScreen;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -28,5 +29,8 @@ public class flying8lacksrandommodClient {
     static void onClientSetup(RegisterMenuScreensEvent event) {
         event.register(ModMenu.H_ELEVATOR_MENU.get(),
                 HElevatorScreen::new);
+
+        event.register(ModMenu.SILLY_MINER_MENU.get(),
+                SillyMinerScreen::new);
     }
 }

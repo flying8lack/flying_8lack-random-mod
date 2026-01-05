@@ -1,17 +1,25 @@
 package com.flying_8lack.random.blockentity;
 
 import com.flying_8lack.random.main.ModBlockEntity;
+import com.flying_8lack.random.menu.HElevatorMenu;
+import com.flying_8lack.random.menu.SillyMinerMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ParticleUtils;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -25,12 +33,13 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 import static com.flying_8lack.random.main.flying8lacksrandommod.lg;
 
-public class SillyMinerBlockEntity extends BlockEntity {
+public class SillyMinerBlockEntity extends BlockEntity implements MenuProvider {
 
     private final ItemStackHandler pickaxe = new ItemStackHandler(1){
         @Override
@@ -43,6 +52,17 @@ public class SillyMinerBlockEntity extends BlockEntity {
     private int currentZ = 0;
     private int currentX = 0;
     private int currentY = 1;
+    private DataSlot data = new DataSlot() {
+        @Override
+        public int get() {
+            return currentY;
+        }
+
+        @Override
+        public void set(int i) {
+            currentY = i;
+        }
+    };
     public boolean mine = false;
 
     public SillyMinerBlockEntity(BlockPos pos, BlockState blockState) {
@@ -138,5 +158,15 @@ public class SillyMinerBlockEntity extends BlockEntity {
         if(tag.contains("X")) this.currentX = tag.getInt("X");
         if(tag.contains("Y")) this.currentY = tag.getInt("Y");
         if(tag.contains("Z")) this.currentZ = tag.getInt("Z");
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return Component.literal("J");
+    }
+
+    @Override
+    public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+        return new SillyMinerMenu(i, inventory, this, data);
     }
 }
