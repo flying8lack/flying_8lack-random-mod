@@ -1,0 +1,15 @@
+{
+
+  "type": "flying8lacksrandommod:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:entities/zombie"
+    },
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.4
+    }
+  ],
+  "item": "minecraft:cookie"
+}
