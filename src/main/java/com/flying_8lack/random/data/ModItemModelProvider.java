@@ -1,0 +1,26 @@
+package com.flying_8lack.random.data;
+
+import com.flying_8lack.random.main.ModItem;
+import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+
+import static com.flying_8lack.random.main.flying8lacksrandommod.MODID;
+
+public class ModItemModelProvider extends ItemModelProvider {
+    public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, MODID, existingFileHelper);
+    }
+
+    @Override
+    protected void registerModels() {
+
+        this.basicItem(ModItem.SILLY_GLASS_SHARD.get());
+        this.orientable("silly_miner",
+                ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_side"),
+                ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_front"),
+                ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_top"));
+
+    }
+}
