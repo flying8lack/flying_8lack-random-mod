@@ -3,6 +3,11 @@
   "block.flying8lacksrandommod.example_block": "Example Block",
   "block.flying8lacksrandommod.h_elevator": "Horizontal Elevator",
   "item.flying8lacksrandommod.example_item": "Example Item",
+  "item.flying8lacksrandommod.fig_food": "Fig",
+  "item.minecraft.potion.effect.figification": "Potion of Figification",
+  "entity.flying8lacksrandommod.fig_entity": "Fig",
+
+  "effect.flying8lacksrandommod.figification": "Figification",
 
 
   "flying8lacksrandommod.configuration.title": "flying_8lack's random mod Configs",

@@ -1,14 +1,19 @@
 package com.flying_8lack.random.main;
 
+import com.flying_8lack.random.items.potions.ModPotions;
 import com.flying_8lack.random.loot.ModLoot;
 import net.minecraft.network.chat.ChatType;
+import com.flying_8lack.random.main.ModData;
 import net.minecraft.network.chat.OutgoingChatMessage;
 import net.minecraft.network.chat.PlayerChatMessage;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.alchemy.Potions;
 import net.neoforged.neoforge.event.ServerChatEvent;
+import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import org.slf4j.Logger;
 
@@ -24,7 +29,6 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-
 import static com.flying_8lack.random.main.ModBlock.BLOCKS;
 import static com.flying_8lack.random.main.ModCreativeTab.CREATIVE_MODE_TABS;
 import static com.flying_8lack.random.main.ModItem.ITEMS;
@@ -58,6 +62,11 @@ public class flying8lacksrandommod {
         ModLoot.GLOBAL_LOOT_MOD_SERIAL.register(modEventBus);
 
         ModMenu.MENU.register(modEventBus);
+
+        ModPotions.POTION.register(modEventBus);
+
+        ModEffect.ME.register(modEventBus);
+        ModEntity.ET.register(modEventBus);
 
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
@@ -116,6 +125,7 @@ public class flying8lacksrandommod {
 
 
 
+
     @SubscribeEvent
     public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
 
@@ -150,6 +160,21 @@ public class flying8lacksrandommod {
 
         }
 
+    }
 
+    @SubscribeEvent // on the game event bus
+    public void registerBrewingRecipes(RegisterBrewingRecipesEvent event) {
+        // Gets the builder to add recipes to
+        PotionBrewing.Builder builder = event.getBuilder();
+
+                // Will add brewing recipes for all container potions (e.g. potion, splash potion, lingering potion)
+                        builder.addMix(
+                        // The initial potion to apply to
+                        Potions.AWKWARD,
+                        // The brewing ingredient. This is the item at the top of the brewing stand.
+                        ModItem.FIG_FOOD.asItem(),
+                        // The resulting potion
+                        ModPotions.FIGIFICATION
+                );
     }
 }

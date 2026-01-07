@@ -2,9 +2,12 @@ package com.flying_8lack.random.main;
 
 import com.flying_8lack.random.client.screen.HElevatorScreen;
 import com.flying_8lack.random.client.screen.SillyMinerScreen;
+import com.flying_8lack.random.client.entity.model.FigEntityModel;
+import com.flying_8lack.random.client.entity.render.FigRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -12,6 +15,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
@@ -40,5 +44,15 @@ public class flying8lacksrandommodClient {
 
         event.register(ModMenu.SILLY_MINER_MENU.get(),
                 SillyMinerScreen::new);
+    }
+
+    @SubscribeEvent
+    static  void registerLayerDef(EntityRenderersEvent.RegisterLayerDefinitions e){
+        e.registerLayerDefinition(FigEntityModel.LAYER_LOCATION, FigEntityModel::createBodyLayer);
+    }
+
+    @SubscribeEvent
+    static  void registerRenderer(EntityRenderersEvent.RegisterRenderers e){
+        e.registerEntityRenderer(ModEntity.FIG_ENTITY.get(), FigRenderer::new);
     }
 }
