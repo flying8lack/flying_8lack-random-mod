@@ -1,6 +1,7 @@
 package com.flying_8lack.random.main;
 
 import com.flying_8lack.random.blockentity.HElevatorBlockEntity;
+import com.flying_8lack.random.blockentity.SillyMinerBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -17,6 +18,13 @@ public class ModBlockEntity {
             "h_elevator_be", () -> BlockEntityType.Builder.of(
                     HElevatorBlockEntity::new,
                     ModBlock.H_ELEVATOR.get()
+            ).build(null)
+    );
+
+    public static final Supplier<BlockEntityType<SillyMinerBlockEntity>> SILLY_MINER_BE = BE.register(
+            "silly_miner_be", () -> BlockEntityType.Builder.of(
+                    SillyMinerBlockEntity::new,
+                    ModBlock.SILLY_MINER.get()
             ).build(null)
     );
 }

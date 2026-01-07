@@ -1,8 +1,6 @@
 package com.flying_8lack.random.main;
 
-import com.flying_8lack.random.data.ModData;
 import com.flying_8lack.random.loot.ModLoot;
-import com.flying_8lack.random.util.BuildUtil;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.OutgoingChatMessage;
 import net.minecraft.network.chat.PlayerChatMessage;
@@ -10,8 +8,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.ServerChatEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import org.slf4j.Logger;
@@ -19,13 +15,7 @@ import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -34,16 +24,9 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
-import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.function.Consumer;
 
 import static com.flying_8lack.random.main.ModBlock.BLOCKS;
-import static com.flying_8lack.random.main.ModBlock.H_ELEVATOR;
+import static com.flying_8lack.random.main.ModCreativeTab.CREATIVE_MODE_TABS;
 import static com.flying_8lack.random.main.ModItem.ITEMS;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -60,20 +43,11 @@ public class flying8lacksrandommod {
     // Create a Deferred Register to hold Items which will all be registered under the "flying8lacksrandommod" namespace
 
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "flying8lacksrandommod" namespace
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     // Creates a new Block with the id "flying8lacksrandommod:example_block", combining the namespace and path
 
 
     // Creates a creative tab with the id "flying8lacksrandommod:example_tab" for the example item, that is placed after the combat tab
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
-            .title(Component.translatable("itemGroup.flying8lacksrandommod")) //The language key for the title of your CreativeModeTab
-            .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> ModBlock.H_ELEVATOR_ITEM.get().getDefaultInstance())
-            .displayItems((parameters, output) -> {
-                output.accept(H_ELEVATOR.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
-                output.accept(ModItem.POST_PROTECTION_UPGRADE_ITEM);
-            }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.

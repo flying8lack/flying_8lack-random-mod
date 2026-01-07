@@ -1,4 +1,4 @@
-package com.flying_8lack.random.data;
+package com.flying_8lack.random.main;
 
 import com.mojang.serialization.Codec;
 import net.neoforged.neoforge.attachment.AttachmentType;
