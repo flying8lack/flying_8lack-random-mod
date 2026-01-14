@@ -1,5 +1,6 @@
 package com.flying_8lack.random.main;
 
+import com.flying_8lack.random.blocks.GhostDoorBlock;
 import com.flying_8lack.random.blocks.HElevatorBlock;
 import com.flying_8lack.random.blocks.SillyMinerBlock;
 import net.minecraft.world.item.BlockItem;
@@ -10,19 +11,26 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.function.Supplier;
+
 import static com.flying_8lack.random.main.ModItem.ITEMS;
 import static com.flying_8lack.random.main.flying8lacksrandommod.MODID;
 
 public class ModBlock {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
 
-    public static final DeferredBlock<Block> H_ELEVATOR = BLOCKS.register("h_elevator",
+    public static final DeferredBlock<Block> H_ELEVATOR = registerBlock("h_elevator",
             () -> new HElevatorBlock(BlockBehaviour.Properties.of().sound(SoundType.COPPER)));
 
-    public static final DeferredBlock<Block> SILLY_MINER = BLOCKS.register("silly_miner",
+    public static final DeferredBlock<Block> SILLY_MINER = registerBlock("silly_miner",
             SillyMinerBlock::new);
+    public static final DeferredBlock<Block> WALL_DOOR = registerBlock("wall_door",
+            GhostDoorBlock::new);
 
-    //block items
-    public static final DeferredItem<BlockItem> H_ELEVATOR_ITEM = ITEMS.registerSimpleBlockItem("h_elevator", H_ELEVATOR);
-    public static final DeferredItem<BlockItem> SILLY_MINER_ITEM = ITEMS.registerSimpleBlockItem("silly_miner", SILLY_MINER);
+    private static <B extends Block> DeferredBlock<B> registerBlock(String name, Supplier<B> block){
+        DeferredBlock<B> toReturn = BLOCKS.register(name, block);
+        ITEMS.registerSimpleBlockItem(name, toReturn);
+        return toReturn;
+    }
+
 }

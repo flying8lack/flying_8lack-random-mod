@@ -14,6 +14,7 @@ public class ModBlockModelProvider extends BlockModelProvider {
 
     @Override
     protected void registerModels() {
+
         this.orientable("silly_miner",
                 ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_side"),
                 ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_front"),

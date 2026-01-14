@@ -1,5 +1,6 @@
 package com.flying_8lack.random.data;
 
+import com.flying_8lack.random.main.ModBlock;
 import com.flying_8lack.random.main.ModItem;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -15,6 +16,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+
+        this.simpleBlockItem(ModBlock.WALL_DOOR.get());
 
         this.basicItem(ModItem.SILLY_GLASS_SHARD.get());
         this.orientable("silly_miner",

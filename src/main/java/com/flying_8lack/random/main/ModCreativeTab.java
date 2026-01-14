@@ -16,7 +16,7 @@ public class ModCreativeTab {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.flying8lacksrandommod")) //The language key for the title of your CreativeModeTab
             .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> ModBlock.H_ELEVATOR_ITEM.get().getDefaultInstance())
+            .icon(() -> ModBlock.H_ELEVATOR.asItem().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(H_ELEVATOR.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
                 output.accept(ModItem.POST_PROTECTION_UPGRADE_ITEM);
