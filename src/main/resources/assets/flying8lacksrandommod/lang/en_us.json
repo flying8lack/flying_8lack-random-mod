@@ -1,8 +1,15 @@
 {
-  "itemGroup.flying8lacksrandommod": "Example Mod Tab",
-  "block.flying8lacksrandommod.example_block": "Example Block",
+  "itemGroup.flying8lacksrandommod": "Flying8lack's random mod",
   "block.flying8lacksrandommod.h_elevator": "Horizontal Elevator",
-  "item.flying8lacksrandommod.example_item": "Example Item",
+  "block.flying8lacksrandommod.gum_ore": "Gum Ore",
+  "block.flying8lacksrandommod.fig_block": "Block of Fig",
+  "block.flying8lacksrandommod.silly_miner": "Silly Miner Block",
+
+
+
+  "item.flying8lacksrandommod.hard_gum": "Hard Gum",
+  "item.flying8lacksrandommod.soft_gum": "Soft Gum",
+  "item.flying8lacksrandommod.silly_glass_shard": "Silly Glass Shard",
   "item.flying8lacksrandommod.fig_food": "Fig",
   "item.minecraft.potion.effect.figification": "Potion of Figification",
   "entity.flying8lacksrandommod.fig_entity": "Fig",

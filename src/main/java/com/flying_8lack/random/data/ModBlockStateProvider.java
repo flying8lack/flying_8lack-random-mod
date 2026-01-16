@@ -21,6 +21,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
 
+        this.simpleBlock(ModBlock.GUM_ORE.get());
+
 
         this.
         horizontalBlock(ModBlock.SILLY_MINER.get(),

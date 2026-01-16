@@ -1,25 +1,31 @@
 package com.flying_8lack.random.main;
 
-import com.flying_8lack.random.data.ModBlockModelProvider;
-import com.flying_8lack.random.data.ModBlockStateProvider;
-import com.flying_8lack.random.data.ModItemModelProvider;
-import com.flying_8lack.random.data.ModRecipeProvider;
+import com.flying_8lack.random.data.*;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = flying8lacksrandommod.MODID)
+import static com.flying_8lack.random.main.flying8lacksrandommod.MODID;
+import static com.flying_8lack.random.world.World.BUILDER;
+
+@EventBusSubscriber(modid = MODID)
 public class ModBus {
 
     @SubscribeEvent
@@ -69,6 +75,21 @@ public class ModBus {
 
         generator.addProvider(event.includeClient(),
                 new ModBlockStateProvider(output, existingFileHelper));
+
+        generator.addProvider(event.includeServer(),
+                new MyLootProvider(output,
+                        Set.of(),
+                        List.of(
+                                new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new,
+                                        LootContextParamSets.BLOCK)
+                        ),
+                        lookupProvider)
+        );
+
+
+
+        generator.addProvider(event.includeServer(),
+                new DatapackBuiltinEntriesProvider(output,lookupProvider, BUILDER, Set.of(MODID)));
 
     }
 }

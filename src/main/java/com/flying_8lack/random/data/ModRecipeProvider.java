@@ -4,11 +4,10 @@ import com.flying_8lack.random.main.ModBlock;
 import com.flying_8lack.random.main.ModItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +25,13 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("XXX")
                 .pattern("XXX")
                 .unlockedBy("has_fig", has(ModItem.FIG_FOOD))
+                .save(recipeOutput);
+
+
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItem.HARD_GUM), RecipeCategory.MISC,
+                ModItem.SOFT_GUM, 2.0f, 50)
+                .unlockedBy("has_hard_gum", has(ModItem.SOFT_GUM))
                 .save(recipeOutput);
 
 

@@ -15,6 +15,9 @@ public class ModItem {
 
     public static final DeferredItem<Item> SILLY_GLASS_SHARD = ITEMS.registerSimpleItem("silly_glass_shard");
 
+    public static final DeferredItem<Item> HARD_GUM = ITEMS.registerSimpleItem("hard_gum");
+
+    public static final DeferredItem<Item> SOFT_GUM = ITEMS.registerSimpleItem("soft_gum");
 
 
     public static final DeferredItem<Item> FIG_FOOD = ITEMS.register(

@@ -18,8 +18,15 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
 
         this.simpleBlockItem(ModBlock.WALL_DOOR.get());
+        //this.simpleBlockItem(ModBlock.GUM_ORE.get());
 
         this.basicItem(ModItem.SILLY_GLASS_SHARD.get());
+
+        this.basicItem(ModItem.HARD_GUM.get());
+        this.basicItem(ModItem.SOFT_GUM.get());
+
+
+
         this.orientable("silly_miner",
                 ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_side"),
                 ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_front"),

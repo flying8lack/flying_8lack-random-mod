@@ -27,12 +27,12 @@ public class ModBlock {
     public static final DeferredBlock<Block> SILLY_MINER = registerBlock("silly_miner",
             SillyMinerBlock::new);
 
-//    public static final DeferredBlock<Block> TEETH_ORE = registerBlock("fig_block",
-//            () -> new Block(BlockBehaviour.Properties.of()
-//                    .instrument(NoteBlockInstrument.GUITAR)
-//                    .mapColor(MapColor.STONE)
-//                    .sound(SoundType.MUD)
-//                    .strength(1.8f)));
+    public static final DeferredBlock<Block> GUM_ORE = registerBlock("gum_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .instrument(NoteBlockInstrument.GUITAR)
+                    .mapColor(MapColor.STONE)
+                    .sound(SoundType.STONE)
+                    .strength(2)));
 
 
     public static final DeferredBlock<Block> FIG_BLOCK = registerBlock("fig_block",

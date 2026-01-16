@@ -42,19 +42,7 @@ public class flying8lacksrandommod {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static Logger lg(){ return LOGGER; }
-    // Create a Deferred Register to hold Blocks which will all be registered under the "flying8lacksrandommod" namespace
 
-    // Create a Deferred Register to hold Items which will all be registered under the "flying8lacksrandommod" namespace
-
-    // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "flying8lacksrandommod" namespace
-
-    // Creates a new Block with the id "flying8lacksrandommod:example_block", combining the namespace and path
-
-
-    // Creates a creative tab with the id "flying8lacksrandommod:example_tab" for the example item, that is placed after the combat tab
-
-    // The constructor for the mod class is the first code that is run when your mod is loaded.
-    // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public flying8lacksrandommod(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -105,7 +93,7 @@ public class flying8lacksrandommod {
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-
+            event.accept(ModBlock.FIG_BLOCK);
         }
     }
 

@@ -18,9 +18,25 @@ public class ModCreativeTab {
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> ModBlock.H_ELEVATOR.asItem().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                output.accept(H_ELEVATOR.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
-                output.accept(ModItem.SILLY_GLASS_SHARD);
 
+
+                //functional blocks
+                output.accept(ModBlock.WALL_DOOR);
+                output.accept(ModBlock.SILLY_MINER);
+                output.accept(H_ELEVATOR.get());
+
+                //misc blocks
                 output.accept(ModBlock.FIG_BLOCK);
+
+                output.accept(ModBlock.GUM_ORE);
+
+                //misc items
+                output.accept(ModItem.SILLY_GLASS_SHARD);
+                output.accept(ModBlock.GUM_ORE);
+                output.accept(ModItem.FIG_FOOD);
+                output.accept(ModItem.HARD_GUM);
+                output.accept(ModItem.SOFT_GUM);
+
+
             }).build());
 }

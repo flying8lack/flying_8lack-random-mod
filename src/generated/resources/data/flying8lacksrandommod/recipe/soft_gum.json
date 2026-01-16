@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 50,
+  "experience": 2.0,
+  "ingredient": {
+    "item": "flying8lacksrandommod:hard_gum"
+  },
+  "result": {
+    "count": 1,
+    "id": "flying8lacksrandommod:soft_gum"
+  }
+}
