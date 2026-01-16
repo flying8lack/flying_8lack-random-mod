@@ -19,7 +19,8 @@ public class ModCreativeTab {
             .icon(() -> ModBlock.H_ELEVATOR.asItem().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(H_ELEVATOR.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
-                output.accept(ModItem.POST_PROTECTION_UPGRADE_ITEM);
                 output.accept(ModItem.SILLY_GLASS_SHARD);
+
+                output.accept(ModBlock.FIG_BLOCK);
             }).build());
 }

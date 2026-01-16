@@ -1,19 +1,14 @@
 package com.flying_8lack.random.blockentity;
 
-import com.flying_8lack.random.items.AbstractUpgradeItem;
 import com.flying_8lack.random.main.ModBlockEntity;
 import com.flying_8lack.random.main.ModItem;
 import com.flying_8lack.random.menu.HElevatorMenu;
-import net.minecraft.client.gui.components.ChatComponent;
-import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.OutgoingChatMessage;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
@@ -36,7 +31,7 @@ public class HElevatorBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler upgrade = new ItemStackHandler(){
         @Override
         public boolean isItemValid(int slot, ItemStack stack) {
-            return stack.getItem() instanceof AbstractUpgradeItem;
+            return stack.is(ModItem.FIG_FOOD);
         }
     };
 
@@ -84,10 +79,6 @@ public class HElevatorBlockEntity extends BlockEntity implements MenuProvider {
             this.coolDown();
             be.setTeleporting(true);
             entity.moveTo(target.above().getBottomCenter());
-            if(!upg.isEmpty() && upg.getItem() instanceof AbstractUpgradeItem u){
-                u.postOperation(entity, level);
-
-            }
             be.setTeleporting(false);
 
 

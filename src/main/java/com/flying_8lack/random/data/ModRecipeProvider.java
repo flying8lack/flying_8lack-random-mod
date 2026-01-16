@@ -1,5 +1,7 @@
 package com.flying_8lack.random.data;
 
+import com.flying_8lack.random.main.ModBlock;
+import com.flying_8lack.random.main.ModItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -18,10 +20,14 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
 
-//        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.DIAMOND)
-//                .define('X', Items.SUGAR)
-//                .pattern("X X")
-//                .unlockedBy("has_sugar", has(Items.SUGAR))
-//                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlock.FIG_BLOCK)
+                .define('X', ModItem.FIG_FOOD)
+                .pattern("XXX")
+                .pattern("XXX")
+                .pattern("XXX")
+                .unlockedBy("has_fig", has(ModItem.FIG_FOOD))
+                .save(recipeOutput);
+
+
     }
 }
