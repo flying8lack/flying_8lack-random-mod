@@ -27,6 +27,18 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_fig", has(ModItem.FIG_FOOD))
                 .save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlock.H_ELEVATOR)
+                .define('F', ModBlock.FIG_BLOCK)
+                .define('G', ModItem.SOFT_GUM)
+                .define('X', ModItem.SILLY_GLASS_SHARD)
+                .pattern("FGF")
+                .pattern("GXG")
+                .pattern("FFF")
+                .unlockedBy("has_fig_block", has(ModBlock.FIG_BLOCK))
+                .unlockedBy("has_soft_gum", has(ModItem.SOFT_GUM))
+                .unlockedBy("has_silly_glass_shard", has(ModItem.SILLY_GLASS_SHARD))
+                .save(recipeOutput);
+
 
 
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModItem.HARD_GUM), RecipeCategory.MISC,

@@ -31,11 +31,6 @@ public class flying8lacksrandommodClient {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
 
-    @SubscribeEvent
-    static void regsiterMenuScreen(FMLClientSetupEvent event) {
-
-
-    }
 
     @SubscribeEvent
     static void regsiterMenuScreen(RegisterMenuScreensEvent event) {

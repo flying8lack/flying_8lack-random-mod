@@ -13,6 +13,8 @@ public class FigLayer extends RenderLayer<FigEntity, FigEntityModel<FigEntity>> 
 
     }
 
+
+
     @Override
     public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, FigEntity figEntity, float v, float v1, float v2, float v3, float v4, float v5) {
 

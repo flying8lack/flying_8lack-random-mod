@@ -19,9 +19,12 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 
 public class FigEntity extends PathfinderMob {
+
+    private int cooldown = 50;
     public FigEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
     }
@@ -29,19 +32,31 @@ public class FigEntity extends PathfinderMob {
     @Override
     public void aiStep() {
         super.aiStep();
-//        if(this.getTarget() instanceof LivingEntity le){
-//            if(le.blockPosition().closerToCenterThan(this.blockPosition().getBottomCenter(),2)){
-//                le.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 60));
-//            }
-//
-//        }
+
+        if (!this.level().isClientSide() && this.isAlive()) {
+            LivingEntity target = this.getTarget();
+
+            if(target != null){
+                this.cooldown -= 1;
+                double distSqr = this.distanceToSqr(target);
+                if(distSqr > 25 && distSqr < 100 && this.onGround() && this.cooldown <= 0){
+                    Vec3 look = target.position().subtract(this.position());
+
+                    this.setDeltaMovement(look.x*0.2, 0.6 , look.z*0.2);
+                    this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 50, 100));
+                    this.cooldown = 50;
+                }
+            }
+        }
 
     }
 
     @Override
     public boolean doHurtTarget(Entity entity) {
         if(entity instanceof LivingEntity le){
-            le.addEffect(new MobEffectInstance(ModEffect.FIGIFICATION, 300));
+            if(le.getActiveEffects().stream().noneMatch(p -> p.is(ModEffect.FIGIFICATION))){
+                le.addEffect(new MobEffectInstance(ModEffect.FIGIFICATION, 300));
+            }
         }
         return super.doHurtTarget(entity);
     }
@@ -58,6 +73,13 @@ public class FigEntity extends PathfinderMob {
 
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Villager.class,
                 false));
+    }
+
+
+    @Override
+    public boolean shouldShowName() {
+        //return super.shouldShowName() && this.hasCustomName();
+        return  false;
     }
 
 

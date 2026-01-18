@@ -26,8 +26,8 @@ public class ModItem {
                             .nutrition(4)
                             .saturationModifier(3.6f)
                             .effect(() -> new MobEffectInstance(
-                                    MobEffects.LUCK, 100
-                            ), 0.1f)
+                                    MobEffects.HEALTH_BOOST, 660, 1
+                            ), 0.99f)
                             .build()
             )
             )
