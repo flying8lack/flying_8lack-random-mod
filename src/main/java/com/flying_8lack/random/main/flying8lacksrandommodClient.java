@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -49,5 +50,6 @@ public class flying8lacksrandommodClient {
     @SubscribeEvent
     static  void registerRenderer(EntityRenderersEvent.RegisterRenderers e){
         e.registerEntityRenderer(ModEntity.FIG_ENTITY.get(), FigRenderer::new);
+        e.registerEntityRenderer(ModEntity.FIG_BLOB_ENTITY.get(), ThrownItemRenderer::new);
     }
 }

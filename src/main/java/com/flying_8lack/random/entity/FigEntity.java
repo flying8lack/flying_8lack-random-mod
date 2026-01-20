@@ -1,6 +1,7 @@
 package com.flying_8lack.random.entity;
 
 
+import com.flying_8lack.random.entity.goals.FireProjectileGoal;
 import com.flying_8lack.random.main.ModEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -39,7 +40,7 @@ public class FigEntity extends PathfinderMob {
             if(target != null){
                 this.cooldown -= 1;
                 double distSqr = this.distanceToSqr(target);
-                if(distSqr > 25 && distSqr < 100 && this.onGround() && this.cooldown <= 0){
+                if(distSqr > 25 && distSqr < 81 && this.onGround() && this.cooldown <= 0){
                     Vec3 look = target.position().subtract(this.position());
 
                     this.setDeltaMovement(look.x*0.2, 0.6 , look.z*0.2);
@@ -65,6 +66,7 @@ public class FigEntity extends PathfinderMob {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new MoveTowardsTargetGoal(this, 1.2f, 1.0f));
+        this.goalSelector.addGoal(1, new FireProjectileGoal(this));
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2f, true));
         this.goalSelector.addGoal(2, new BreakDoorGoal(this, (p) -> true));
         this.goalSelector.addGoal(3, new RandomStrollGoal(this, 1.1f));

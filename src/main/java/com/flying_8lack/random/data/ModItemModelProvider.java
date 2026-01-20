@@ -18,7 +18,8 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
 
         this.simpleBlockItem(ModBlock.WALL_DOOR.get());
-        //this.simpleBlockItem(ModBlock.GUM_ORE.get());
+        withExistingParent(ModBlock.GUM_ORE.getId().getPath(),
+                modLoc("block/" + ModBlock.GUM_ORE.getId().getPath()));
 
         this.basicItem(ModItem.SILLY_GLASS_SHARD.get());
 

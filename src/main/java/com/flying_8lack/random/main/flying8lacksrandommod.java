@@ -8,6 +8,8 @@ import net.minecraft.network.chat.OutgoingChatMessage;
 import net.minecraft.network.chat.PlayerChatMessage;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.monster.Giant;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionBrewing;
@@ -101,8 +103,10 @@ public class flying8lacksrandommod {
     @SubscribeEvent
     public void onChatEvent(ServerChatEvent event) {
         // Do something when the server starts
-        if (event.getRawText().contains("joke")){
-            event.getPlayer().getInventory().add(new ItemStack(Items.DIRT));
+        if (event.getRawText().contains("ggg")){
+            Giant g = EntityType.GIANT.create(event.getPlayer().level());
+            g.moveTo(event.getPlayer().position());
+            event.getPlayer().level().addFreshEntity(g);
         }
 
     }
