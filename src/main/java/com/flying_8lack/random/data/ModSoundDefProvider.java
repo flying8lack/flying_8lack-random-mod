@@ -19,5 +19,8 @@ public class ModSoundDefProvider extends SoundDefinitionsProvider {
         add(ModSound.WET_SOUND.value(), SoundDefinition.definition()
                 .with(sound(MODID+":wet_sound")));
 
+        add(ModSound.FIG_WALKING_SOUND.value(), SoundDefinition.definition()
+                .with(sound(MODID+":fig_walking")));
+
     }
 }

@@ -1,4 +1,9 @@
 {
+  "fig_walking": {
+    "sounds": [
+      "flying8lacksrandommod:fig_walking"
+    ]
+  },
   "wet_sound": {
     "sounds": [
       "flying8lacksrandommod:wet_sound"

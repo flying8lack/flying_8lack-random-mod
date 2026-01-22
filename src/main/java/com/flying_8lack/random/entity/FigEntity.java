@@ -3,6 +3,8 @@ package com.flying_8lack.random.entity;
 
 import com.flying_8lack.random.entity.goals.FireProjectileGoal;
 import com.flying_8lack.random.main.ModEffect;
+import com.flying_8lack.random.main.ModSound;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -21,6 +23,7 @@ import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 
 public class FigEntity extends PathfinderMob {
@@ -28,6 +31,11 @@ public class FigEntity extends PathfinderMob {
     private int cooldown = 50;
     public FigEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
+    }
+
+    @Override
+    protected @Nullable SoundEvent getAmbientSound() {
+        return ModSound.FIG_WALKING_SOUND.value();
     }
 
     @Override
