@@ -52,6 +52,8 @@ public class FigEntity extends PathfinderMob {
 
     }
 
+
+
     @Override
     public boolean doHurtTarget(Entity entity) {
         if(entity instanceof LivingEntity le){
@@ -78,11 +80,6 @@ public class FigEntity extends PathfinderMob {
     }
 
 
-    @Override
-    public boolean shouldShowName() {
-        //return super.shouldShowName() && this.hasCustomName();
-        return  false;
-    }
 
 
 }

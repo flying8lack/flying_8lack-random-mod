@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_plains",
+  "spawners": {
+    "type": "flying8lacksrandommod:fig_entity",
+    "maxCount": 7,
+    "minCount": 3,
+    "weight": 16
+  }
+}

@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
@@ -15,12 +16,12 @@ import org.jetbrains.annotations.Nullable;
 import static com.flying_8lack.random.client.entity.model.FigEntityModel.LAYER_LOCATION;
 import static com.flying_8lack.random.main.flying8lacksrandommod.MODID;
 
-public class FigRenderer extends LivingEntityRenderer<FigEntity, FigEntityModel<FigEntity>> {
+public class FigRenderer extends MobRenderer<FigEntity, FigEntityModel<FigEntity>> {
 
     public FigRenderer(EntityRendererProvider.Context context) {
 
         super(context, new FigEntityModel<>(context.bakeLayer(LAYER_LOCATION)), 0.5f);
-        this.addLayer(new FigLayer(this));
+       this.addLayer(new FigLayer(this));
 
     }
 
@@ -28,6 +29,13 @@ public class FigRenderer extends LivingEntityRenderer<FigEntity, FigEntityModel<
     protected @Nullable RenderType getRenderType(FigEntity livingEntity, boolean bodyVisible, boolean translucent, boolean glowing) {
         return RenderType.entityCutout(this.getTextureLocation(livingEntity));
     }
+
+    @Override
+    protected void renderNameTag(FigEntity entity, Component displayName, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, float partialTick) {
+        super.renderNameTag(entity, displayName, poseStack, bufferSource, packedLight, partialTick);
+    }
+
+
 
     @Override
     public ResourceLocation getTextureLocation(FigEntity figEntity) {

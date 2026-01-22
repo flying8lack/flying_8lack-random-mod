@@ -51,6 +51,8 @@ public class flying8lacksrandommod {
         ModData.ATTACHMENT_TYPES.register(modEventBus);
         ModLoot.GLOBAL_LOOT_MOD_SERIAL.register(modEventBus);
 
+        ModSound.SOUND_EVENT.register(modEventBus);
+
         ModMenu.MENU.register(modEventBus);
 
         ModPotions.POTION.register(modEventBus);
@@ -110,13 +112,6 @@ public class flying8lacksrandommod {
         }
 
     }
-
-
-
-
-
-
-
 
     @SubscribeEvent
     public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {

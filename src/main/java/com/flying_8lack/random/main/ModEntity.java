@@ -21,6 +21,7 @@ public class ModEntity {
 
     public static final Supplier<EntityType<FigEntity>> FIG_ENTITY = ET.register("fig_entity",
             () -> EntityType.Builder.of(FigEntity::new, MobCategory.CREATURE)
+                    .sized(1, 0.9f)
                     .build("fig_entity"));
 
     public static final Supplier<EntityType<FigBlobProjectile>> FIG_BLOB_ENTITY = ET.register("fig_blob",

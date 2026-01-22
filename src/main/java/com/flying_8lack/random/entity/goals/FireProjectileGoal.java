@@ -2,6 +2,7 @@ package com.flying_8lack.random.entity.goals;
 
 import com.flying_8lack.random.entity.projectiles.FigBlobProjectile;
 import com.flying_8lack.random.main.ModEntity;
+import com.flying_8lack.random.main.ModSound;
 import net.minecraft.core.Vec3i;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -36,7 +37,7 @@ public class FireProjectileGoal extends Goal {
     public void start() {
         this.timer = 0;
         this.mob.level().playSound(this.mob, this.mob.blockPosition(),
-                SoundEvent.createVariableRangeEvent(SoundEvents.AMBIENT_BASALT_DELTAS_MOOD.getKey().location()),
+                SoundEvent.createVariableRangeEvent(ModSound.WET_SOUND.value().getLocation()),
                 SoundSource.HOSTILE, 1.0f, 1.2f);
     }
 

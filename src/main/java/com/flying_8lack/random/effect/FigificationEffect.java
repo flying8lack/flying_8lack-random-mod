@@ -50,12 +50,15 @@ public class FigificationEffect extends MobEffect {
 
             Level level = livingEntity.level();
             //FigEntity f = new FigEntity(ModEntity.FIG_ENTITY.get(), level);
-            if(level instanceof ServerLevel sr && livingEntity instanceof Player p) {
+            if(level instanceof ServerLevel sr) {
 
                 FigEntity f = ModEntity.FIG_ENTITY.get().spawn(sr, livingEntity.getOnPos().above(), MobSpawnType.MOB_SUMMONED);
                 if (f != null) {
+                    if(livingEntity instanceof Player p) {
+                        p.getFoodData().setFoodLevel(Math.max(0, p.getFoodData().getFoodLevel() - 4));
 
-                    p.getFoodData().setFoodLevel(Math.max(0, p.getFoodData().getFoodLevel() - 2));
+
+                    }
                     f.setTarget(livingEntity);
                 }
             }
