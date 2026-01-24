@@ -23,10 +23,7 @@ import net.minecraft.world.level.storage.loot.functions.SetEnchantmentsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.EnchantmentLevelProvider;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
+import net.minecraft.world.level.storage.loot.providers.number.*;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.stream.Stream;
@@ -65,6 +62,8 @@ public class ModEntityLootTableProvider extends EntityLootSubProvider {
                                 )
                 )
         );
+
+
 
 
     }

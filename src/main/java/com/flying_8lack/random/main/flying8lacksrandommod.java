@@ -98,6 +98,22 @@ public class flying8lacksrandommod {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(ModBlock.FIG_BLOCK);
+
+        }
+        if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
+            event.accept(ModItem.FIG_SPAWN_EGG);
+
+        }
+        if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
+            event.accept(ModBlock.GUM_ORE);
+        }
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItem.HARD_GUM);
+            event.accept(ModItem.SOFT_GUM);
+        }
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            event.accept(ModBlock.H_ELEVATOR);
+            event.accept(ModBlock.SILLY_MINER);
         }
     }
 

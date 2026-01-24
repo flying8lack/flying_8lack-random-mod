@@ -11,16 +11,22 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.projectile.Fireball;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class FireProjectileGoal extends Goal {
 
     private int timer = 0;
     private Mob mob;
+    private Function<Mob, Projectile> projectile;
 
-    public  FireProjectileGoal(Mob mob){
+    public  FireProjectileGoal(Mob mob, Function<Mob, Projectile> projectile){
         this.mob = mob;
+        this.projectile = projectile;
     }
     @Override
     public boolean canUse() {
@@ -52,17 +58,10 @@ public class FireProjectileGoal extends Goal {
 
        if(this.timer == 80){
            LivingEntity target = this.mob.getTarget();
-           Vec3 loc = this.mob.getForward().scale(2);
 
            if(target == null) return;
            this.mob.getLookControl().setLookAt(target);
-           FigBlobProjectile b = ModEntity.FIG_BLOB_ENTITY.get().spawn((ServerLevel) this.mob.level(),
-                   this.mob.blockPosition().offset((int) loc.x, (int) (loc.y+this.mob.getBbHeight()), (int) loc.z),
-                   MobSpawnType.MOB_SUMMONED);
-
-           b.setOwner(this.mob);
-
-           b.setTarget(target);
+           this.mob.level().addFreshEntity(this.projectile.apply(this.mob));
 
        }
     }

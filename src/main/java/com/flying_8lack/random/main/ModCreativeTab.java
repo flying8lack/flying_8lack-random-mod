@@ -36,6 +36,7 @@ public class ModCreativeTab {
                 output.accept(ModItem.FIG_FOOD);
                 output.accept(ModItem.HARD_GUM);
                 output.accept(ModItem.SOFT_GUM);
+                output.accept(ModItem.FIG_SPAWN_EGG);
 
 
             }).build());

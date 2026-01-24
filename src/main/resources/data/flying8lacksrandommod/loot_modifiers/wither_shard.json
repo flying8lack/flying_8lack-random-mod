@@ -1,0 +1,12 @@
+{
+
+  "type": "flying8lacksrandommod:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:entities/wither"
+    }
+  ],
+  "item": "flying8lacksrandommod:silly_glass_shard",
+  "count": 6
+}

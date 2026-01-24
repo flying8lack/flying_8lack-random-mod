@@ -22,6 +22,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
 
         this.simpleBlock(ModBlock.GUM_ORE.get());
+        this.simpleBlock(ModBlock.FIG_BLOCK.get());
 
 
         this.

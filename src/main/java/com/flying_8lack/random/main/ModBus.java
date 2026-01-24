@@ -2,23 +2,33 @@ package com.flying_8lack.random.main;
 
 import com.flying_8lack.random.data.*;
 import com.flying_8lack.random.entity.goals.FireProjectileGoal;
+import com.flying_8lack.random.entity.projectiles.FigBlobProjectile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.ZombieAttackGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Giant;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -78,9 +88,9 @@ public class ModBus {
     @SubscribeEvent
     public static void mobCreator (EntityAttributeCreationEvent e){
         e.put(ModEntity.FIG_ENTITY.get(),
-                LivingEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 8.0f)
-                        .add(Attributes.FOLLOW_RANGE)
-                        .add(Attributes.MOVEMENT_SPEED, 0.15)
+                LivingEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 12.0f)
+                        .add(Attributes.FOLLOW_RANGE, 36.0f)
+                        .add(Attributes.MOVEMENT_SPEED, 0.19)
                         .add(Attributes.ATTACK_DAMAGE, 5)
                         .build());
 
@@ -92,8 +102,9 @@ public class ModBus {
         // Check if the Giant has the attribute first, then add/modify it
         // Giants by default have health/attack but you can boost them
         event.add(EntityType.GIANT, Attributes.MAX_HEALTH, 200.0);
-        event.add(EntityType.GIANT, Attributes.ATTACK_DAMAGE, 8.0);
-        event.add(EntityType.GIANT, Attributes.MOVEMENT_SPEED, 0.2);
+        event.add(EntityType.GIANT, Attributes.ATTACK_DAMAGE, 12.0);
+        event.add(EntityType.GIANT, Attributes.MOVEMENT_SPEED, 0.27);
+        event.add(EntityType.GIANT, Attributes.FOLLOW_RANGE, 48.0f);
 
     }
 
@@ -101,8 +112,26 @@ public class ModBus {
     @SubscribeEvent
     public static void modMobs (EntityJoinLevelEvent e){
         if(e.getEntity() instanceof Giant g){
-            g.goalSelector.addGoal(0, new MeleeAttackGoal(g, 1.1f, true));
+            g.goalSelector.addGoal(0, new FireProjectileGoal(g,mob -> {
+                LivingEntity target = mob.getTarget();
+
+                Vec3 loc = target.position().subtract(mob.position().add(0,mob.getBbHeight(),0)).normalize();
+                LargeFireball b = new LargeFireball(mob.level(), mob, loc, 4);
+
+
+                b.moveTo(mob.position().add(loc.x, loc.y+mob.getBbHeight(),loc.z));
+                b.setOwner(mob);
+
+                return b;
+            }));
+            g.goalSelector.addGoal(0, new FloatGoal(g));
+            g.goalSelector.addGoal(1, new MeleeAttackGoal(g, 1.2f, true));
+            g.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(g, 1.0f));
             g.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(g, Player.class, false));
+            g.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(g, AbstractVillager.class, false));
+            g.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(g, IronGolem.class, true));
+
+
 
 
         }

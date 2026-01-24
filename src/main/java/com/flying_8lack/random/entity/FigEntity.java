@@ -2,15 +2,15 @@ package com.flying_8lack.random.entity;
 
 
 import com.flying_8lack.random.entity.goals.FireProjectileGoal;
+import com.flying_8lack.random.entity.projectiles.FigBlobProjectile;
 import com.flying_8lack.random.main.ModEffect;
+import com.flying_8lack.random.main.ModEntity;
 import com.flying_8lack.random.main.ModSound;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -19,6 +19,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.TargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -72,11 +73,28 @@ public class FigEntity extends PathfinderMob {
         return super.doHurtTarget(entity);
     }
 
+    private FigBlobProjectile summonProjectile(Mob mob){
+        LivingEntity target = mob.getTarget();
+        Vec3 loc = mob.getForward().scale(2);
+        FigBlobProjectile b = ModEntity.FIG_BLOB_ENTITY.get().spawn((ServerLevel) mob.level(),
+                mob.blockPosition().offset((int) loc.x, (int) (loc.y+mob.getBbHeight()), (int) loc.z),
+                MobSpawnType.MOB_SUMMONED);
+
+
+
+        b.setOwner(mob);
+
+        b.setTarget(target);
+
+        return b;
+
+    }
+
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new MoveTowardsTargetGoal(this, 1.2f, 1.0f));
-        this.goalSelector.addGoal(1, new FireProjectileGoal(this));
+        this.goalSelector.addGoal(1, new FireProjectileGoal(this, this::summonProjectile));
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2f, true));
         this.goalSelector.addGoal(2, new BreakDoorGoal(this, (p) -> true));
         this.goalSelector.addGoal(3, new RandomStrollGoal(this, 1.1f));

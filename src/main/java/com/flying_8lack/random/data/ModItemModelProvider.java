@@ -18,6 +18,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
 
         this.simpleBlockItem(ModBlock.WALL_DOOR.get());
+        this.simpleBlockItem(ModBlock.FIG_BLOCK.get());
         withExistingParent(ModBlock.GUM_ORE.getId().getPath(),
                 modLoc("block/" + ModBlock.GUM_ORE.getId().getPath()));
 
