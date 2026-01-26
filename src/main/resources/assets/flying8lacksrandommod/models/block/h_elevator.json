@@ -1,6 +1,12 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "all": "flying8lacksrandommod:block/h_elevator"
+    "down": "flying8lacksrandommod:block/h_elevator_top",
+    "east": "flying8lacksrandommod:block/h_elevator",
+    "north": "flying8lacksrandommod:block/h_elevator",
+    "particle": "minecraft:block/crafting_table_front",
+    "south": "flying8lacksrandommod:block/h_elevator",
+    "up": "flying8lacksrandommod:block/h_elevator_top",
+    "west": "flying8lacksrandommod:block/h_elevator"
   }
 }
