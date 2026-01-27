@@ -1,5 +1,6 @@
 package com.flying_8lack.random.blockentity;
 
+import com.flying_8lack.random.main.Config;
 import com.flying_8lack.random.main.ModBlockEntity;
 import com.flying_8lack.random.main.ModItem;
 import com.flying_8lack.random.menu.HElevatorMenu;
@@ -94,7 +95,7 @@ public class HElevatorBlockEntity extends BlockEntity implements MenuProvider {
         this.target = null;
         Direction a = entity.getDirection();
         Vec3i directionView = new Vec3i(a.getStepX(), a.getStepY(), a.getStepZ());
-        for(int i = 1; i < 32; i++){
+        for(int i = 1; i < Config.MAXIMUM_ELEVATOR_SEARCH_DISTANCE.getAsInt(); i++){
             if (level.getBlockEntity(init.offset(directionView.multiply(i))) instanceof HElevatorBlockEntity b){
                 if (b.target == null) {
                     this.target = init.offset(directionView.multiply(i));

@@ -19,6 +19,10 @@ public class Config {
             .comment("Whether to log the dirt block on common setup")
             .define("logDirtBlock", true);
 
+    public static final ModConfigSpec.IntValue MAXIMUM_ELEVATOR_SEARCH_DISTANCE = BUILDER
+            .comment("The maximum distance the elevator will search for other elevator blocks")
+            .defineInRange("maxElevatorSearchDistance", 32, 16, 256);
+
     public static final ModConfigSpec.IntValue MAGIC_NUMBER = BUILDER
             .comment("A magic number")
             .defineInRange("magicNumber", 42, 0, Integer.MAX_VALUE);

@@ -4,6 +4,7 @@ import com.flying_8lack.random.main.ModBlockEntity;
 import com.flying_8lack.random.menu.HElevatorMenu;
 import com.flying_8lack.random.menu.SillyMinerMenu;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -31,7 +32,11 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,10 +53,14 @@ public class SillyMinerBlockEntity extends BlockEntity implements MenuProvider {
         }
     };
 
-    private int coolDown = 16;
+    private BlockCapabilityCache<IItemHandler, @Nullable Direction> outputStorage;
+
+    private BlockPos position;
+
+    private int coolDown = 8;
     private int currentZ = 0;
     private int currentX = 0;
-    private int currentY = 1;
+    private int currentY = 0;
     private DataSlot data = new DataSlot() {
         @Override
         public int get() {
@@ -67,6 +76,21 @@ public class SillyMinerBlockEntity extends BlockEntity implements MenuProvider {
 
     public SillyMinerBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntity.SILLY_MINER_BE.get(), pos, blockState);
+        this.position = pos;
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if(this.level instanceof ServerLevel server) {
+            this.outputStorage = BlockCapabilityCache.create(
+                    Capabilities.ItemHandler.BLOCK,
+                    server,
+                    this.position.above(),
+                    Direction.UP
+            );
+        }
+
     }
 
     public List<ItemStack> mine(Level level, BlockPos pos, ItemStack tool, BlockState state){
@@ -82,6 +106,19 @@ public class SillyMinerBlockEntity extends BlockEntity implements MenuProvider {
         return loot;
     }
 
+    private void advance(){
+        this.currentX += 1;
+        if(this.currentX > 8){
+            this.currentX = 0;
+            this.currentZ += 1;
+        }
+
+        if(this.currentZ > 8){
+            this.currentZ = 0;
+            this.currentY += 1;
+        }
+    }
+
     public void tick(Level level, BlockState state, BlockPos pos, SillyMinerBlockEntity be){
         if(coolDown > 0){
             coolDown -= 1;
@@ -94,17 +131,38 @@ public class SillyMinerBlockEntity extends BlockEntity implements MenuProvider {
                             -this.currentY,
                             this.currentZ-4);
 
+            if (target == pos) {
+                coolDown = 2;
+                this.advance();
+                return;
+
+            }
+
             BlockState target_blockstate = level.getBlockState(target);
 
-//            if(target_blockstate.is(Blocks.AIR)) {
-//                coolDown = 10;
-//                return;
-//            }
 
+            List<ItemStack> drops = this.mine(level, target, p, target_blockstate);
 
             p.hurtAndBreak(2, (ServerLevel) level, null, (i) -> {});
-            this.mine(level, target, p, target_blockstate).forEach(
-                    c -> level.addFreshEntity(new ItemEntity(level, pos.getX(), pos.getY()+1, pos.getZ(), c)));
+
+            if(this.outputStorage.getCapability() != null) {
+
+                for(ItemStack item : drops) {
+
+                    ItemStack left_over = ItemHandlerHelper.insertItemStacked(this.outputStorage.getCapability(),item,false);
+                    if(!left_over.isEmpty()){
+                        level.addFreshEntity(new ItemEntity(level, pos.getX()+0.5
+                                , pos.getY()+1.8, pos.getZ()+0.5, left_over));
+                    }
+                }
+            } else {
+                level.invalidateCapabilities(pos.above());
+                drops.forEach(
+                        c -> level.addFreshEntity(new ItemEntity(level, pos.getX()+0.5
+                                , pos.getY()+1.8, pos.getZ()+0.5, c)));
+            }
+
+
 
             level.setBlock(target, Blocks.AIR.defaultBlockState(), 3);
 
@@ -113,26 +171,17 @@ public class SillyMinerBlockEntity extends BlockEntity implements MenuProvider {
                     0.4);
 
             level.playSound(null, target, SoundEvent.createVariableRangeEvent(
-                    SoundEvents.ENDER_EYE_DEATH.getLocation()
+                    SoundEvents.COW_STEP.getLocation()
             ), SoundSource.BLOCKS, 0.75f, 1.0f);
 
-            this.currentX += 1;
-            if(this.currentX > 8){
-                this.currentX = 0;
-                this.currentZ += 1;
-            }
-
-            if(this.currentZ > 8){
-                this.currentZ = 0;
-                this.currentY += 1;
-            }
+            this.advance();
 
             be.setChanged();
 
 
         }
 
-        coolDown = 16;
+        coolDown = 8;
     }
 
     public ItemStackHandler getInv(){
@@ -162,7 +211,7 @@ public class SillyMinerBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("J");
+        return Component.literal("Silly Miner");
     }
 
     @Override
