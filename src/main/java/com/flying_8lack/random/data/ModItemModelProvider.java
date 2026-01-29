@@ -34,8 +34,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         this.orientable("silly_miner",
                 ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_side"),
-                ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_front"),
-                ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_top"));
+                ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_top"),
+                ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_front"));
 
     }
 }

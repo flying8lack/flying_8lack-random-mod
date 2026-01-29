@@ -23,13 +23,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         this.simpleBlock(ModBlock.GUM_ORE.get());
         this.simpleBlock(ModBlock.FIG_BLOCK.get());
+        this.simpleBlock(ModBlock.WALL_DOOR.get());
+        //this.simpleBlock();
+
+
 
 
         this.
         horizontalBlock(ModBlock.SILLY_MINER.get(),
                 ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_side"),
-                ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_front"),
-                ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_top"));
+                ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_top"),
+                ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_front"));
     }
 
     private void ghostDoorBlock(Block block) {
