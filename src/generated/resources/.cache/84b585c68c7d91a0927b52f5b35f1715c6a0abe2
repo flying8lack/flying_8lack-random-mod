@@ -1,7 +1,9 @@
-// 1.21.1	2026-01-23T17:48:46.9409149	Block States: flying8lacksrandommod
+// 1.21.1	2026-01-29T00:29:06.9114278	Block States: flying8lacksrandommod
 60597d2a6220975bc6e070b1849163b5e9f44901 assets/flying8lacksrandommod/blockstates/fig_block.json
 0fe30e309b2ef2599251bc2022eb28758a1dd283 assets/flying8lacksrandommod/blockstates/gum_ore.json
 1037557f62b746fbcc57d848468f58c0a4886a0a assets/flying8lacksrandommod/blockstates/silly_miner.json
+076222220030f619e1e04486f12cd8064978f32f assets/flying8lacksrandommod/blockstates/wall_door.json
 28132577a091849029f785252fc459b53d849f46 assets/flying8lacksrandommod/models/block/fig_block.json
 c8974e53c58142731ceda9b2bc11b424fa1e82ae assets/flying8lacksrandommod/models/block/gum_ore.json
-00445c0fe9fe03163ee340091bc1089d93e0008d assets/flying8lacksrandommod/models/block/silly_miner.json
+3fb00b08be2355fe7b72368ebc7fcf45cd87419f assets/flying8lacksrandommod/models/block/silly_miner.json
+b4637e4e8e77c3914f8ba0dc73938faa497f7186 assets/flying8lacksrandommod/models/block/wall_door.json

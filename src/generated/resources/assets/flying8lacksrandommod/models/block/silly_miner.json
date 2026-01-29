@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/orientable",
   "textures": {
-    "front": "flying8lacksrandommod:block/silly_miner_front",
+    "front": "flying8lacksrandommod:block/silly_miner_top",
     "side": "flying8lacksrandommod:block/silly_miner_side",
-    "top": "flying8lacksrandommod:block/silly_miner_top"
+    "top": "flying8lacksrandommod:block/silly_miner_front"
   }
 }

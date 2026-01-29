@@ -1,6 +1,5 @@
 package com.flying_8lack.random.blocks;
 
-import com.flying_8lack.random.blockentity.HElevatorBlockEntity;
 import com.flying_8lack.random.blockentity.SillyMinerBlockEntity;
 import com.flying_8lack.random.main.ModBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -13,7 +12,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -30,7 +28,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 import static com.flying_8lack.random.main.flying8lacksrandommod.lg;
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.EYE;
 
 public class SillyMinerBlock extends Block implements EntityBlock {
 
@@ -47,7 +44,7 @@ public class SillyMinerBlock extends Block implements EntityBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
     }
 
     @Override

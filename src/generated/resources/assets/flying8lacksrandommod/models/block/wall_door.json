@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "flying8lacksrandommod:block/h_elevator"
+    "all": "flying8lacksrandommod:block/wall_door"
   }
 }
