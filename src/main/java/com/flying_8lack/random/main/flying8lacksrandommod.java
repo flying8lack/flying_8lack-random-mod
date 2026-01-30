@@ -126,7 +126,6 @@ public class flying8lacksrandommod {
             g.moveTo(event.getPlayer().position());
             event.getPlayer().level().addFreshEntity(g);
         }
-
     }
 
     @SubscribeEvent

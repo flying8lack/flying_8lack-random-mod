@@ -3,7 +3,8 @@
   "block.flying8lacksrandommod.h_elevator": "Horizontal Elevator",
   "block.flying8lacksrandommod.gum_ore": "Gum Ore",
   "block.flying8lacksrandommod.fig_block": "Block of Fig",
-  "block.flying8lacksrandommod.silly_miner": "Silly Miner Block",
+  "block.flying8lacksrandommod.silly_miner": "Silly Miner",
+  "block.flying8lacksrandommod.wall_door": "Wall Door",
 
 
   "item.flying8lacksrandommod.fig_spawn_egg": "Fig Spawn Egg",
@@ -14,6 +15,9 @@
   "item.flying8lacksrandommod.silly_glass_shard": "Silly Glass Shard",
   "item.flying8lacksrandommod.fig_food": "Fig",
   "item.minecraft.potion.effect.figification": "Potion of Figification",
+  "item.minecraft.splash_potion.effect.figification": "Splash Potion of Figification",
+  "item.minecraft.tipped_arrow.effect.figification": "Arrow of Figification",
+  "item.minecraft.lingering_potion.effect.figification": "Lingering Potion of Figification",
   "entity.flying8lacksrandommod.fig_entity": "Fig",
 
   "effect.flying8lacksrandommod.figification": "Figification",
@@ -25,5 +29,7 @@
   "flying8lacksrandommod.configuration.items": "Item List",
   "flying8lacksrandommod.configuration.logDirtBlock": "Log Dirt Block",
   "flying8lacksrandommod.configuration.magicNumberIntroduction": "Magic Number Text",
-  "flying8lacksrandommod.configuration.magicNumber": "Magic Number"
+  "flying8lacksrandommod.configuration.magicNumber": "Magic Number",
+  "flying8lacksrandommod.configuration.maxElevatorSearchDistance": "Max Elevator Reach Distance",
+  "flying8lacksrandommod.configuration.giveShovelAtStart": "Give A Shovel At Start"
 }
