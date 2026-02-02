@@ -44,9 +44,23 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_silly_glass_shard", has(ModItem.SILLY_GLASS_SHARD))
                 .save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlock.SILLY_MINER)
+                .define('F', ModBlock.FIG_BLOCK)
+                .define('S', ModItem.SOFT_GUM)
+                .define('X', ModItem.SILLY_GLASS_SHARD)
+                .define('Q', Items.QUARTZ)
+                .pattern("QXQ")
+                .pattern("XSX")
+                .pattern("QFQ")
+                .unlockedBy("has_fig_block", has(ModBlock.FIG_BLOCK))
+                .unlockedBy("has_soft_gum", has(ModItem.SOFT_GUM))
+                .unlockedBy("has_silly_glass_shard", has(ModItem.SILLY_GLASS_SHARD))
+                .save(recipeOutput);
+
         PotionContents inv = new PotionContents(Potions.INVISIBILITY);
         ItemStack p = new ItemStack(Items.POTION);
         p.set(DataComponents.POTION_CONTENTS, inv);
+
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlock.WALL_DOOR)
                 .define('F', ModBlock.FIG_BLOCK)
