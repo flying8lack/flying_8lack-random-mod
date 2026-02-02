@@ -16,6 +16,7 @@ public class ModSound {
             "wet_sound", SoundEvent::createVariableRangeEvent
     );
 
+
     public static final Holder<SoundEvent>  FIG_WALKING_SOUND = SOUND_EVENT.register(
             "fig_walking", SoundEvent::createVariableRangeEvent
     );
