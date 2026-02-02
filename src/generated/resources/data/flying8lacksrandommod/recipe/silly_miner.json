@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "F": {
+      "item": "flying8lacksrandommod:fig_block"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "S": {
+      "item": "flying8lacksrandommod:soft_gum"
+    },
+    "X": {
+      "item": "flying8lacksrandommod:silly_glass_shard"
+    }
+  },
+  "pattern": [
+    "QXQ",
+    "XSX",
+    "QFQ"
+  ],
+  "result": {
+    "count": 1,
+    "id": "flying8lacksrandommod:silly_miner"
+  }
+}
