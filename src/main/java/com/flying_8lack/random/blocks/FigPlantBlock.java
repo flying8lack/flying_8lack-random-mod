@@ -27,9 +27,9 @@ public class FigPlantBlock extends CropBlock {
 
 
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
-            Block.box(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
             Block.box(0.0, 0.0, 0.0, 16.0, 4.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0),
+            Block.box(0.0, 0.0, 0.0, 16.0, 6.0, 16.0),
+            Block.box(0.0, 0.0, 0.0, 16.0, 13.0, 16.0),
             Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0)
     };
 
