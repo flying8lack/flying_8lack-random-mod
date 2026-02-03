@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "flying8lacksrandommod:block/fig_plant_stage0"
+    },
+    "age=1": {
+      "model": "flying8lacksrandommod:block/fig_plant_stage1"
+    },
+    "age=2": {
+      "model": "flying8lacksrandommod:block/fig_plant_stage2"
+    },
+    "age=3": {
+      "model": "flying8lacksrandommod:block/fig_plant_stage3"
+    }
+  }
+}

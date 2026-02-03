@@ -1,5 +1,6 @@
 package com.flying_8lack.random.data;
 
+import com.flying_8lack.random.blocks.FigPlantBlock;
 import com.flying_8lack.random.blocks.GhostDoorBlock;
 import com.flying_8lack.random.main.ModBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -9,6 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import static com.flying_8lack.random.main.flying8lacksrandommod.MODID;
@@ -24,9 +26,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         this.simpleBlock(ModBlock.GUM_ORE.get());
         this.simpleBlock(ModBlock.FIG_BLOCK.get());
         this.simpleBlock(ModBlock.WALL_DOOR.get());
+
+
         //this.simpleBlock();
 
-
+        cropModel(ModBlock.FIG_PLANT_BLOCK.get(), "fig_plant_stage");
 
 
         this.
@@ -36,20 +40,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_front"));
     }
 
-    private void ghostDoorBlock(Block block) {
-        // Create the "closed" model (a standard cube)
-        ModelFile closedModel = cubeAll(block);
-
-        // Create an "open" model (invisible/empty)
-        // Note: Using a built-in air-like model or a very small transparent cube
-        ModelFile openModel = models().getBuilder(name(block) + "_open");
-
-        getVariantBuilder(block).forAllStates(state -> {
-            boolean powered = state.getValue(GhostDoorBlock.POWERED);
-            return ConfiguredModel.builder()
-                    .modelFile(powered ? openModel : closedModel)
-                    .build();
-        });
+    private void cropModel(Block block, String textureName){
+        VariantBlockStateBuilder build = getVariantBuilder(block);
+        for(int i = 0; i <= 3; i++){
+            build.partialState().with(FigPlantBlock.AGE, i)
+                    .modelForState()
+                    .modelFile(models().crop("fig_plant_stage"+i,
+                                    modLoc("block/crop/" + textureName + i))
+                            .renderType("cutout"))
+                    .addModel();
+        }
     }
     private String name(Block block) {
         return BuiltInRegistries.BLOCK.getKey(block).getPath();

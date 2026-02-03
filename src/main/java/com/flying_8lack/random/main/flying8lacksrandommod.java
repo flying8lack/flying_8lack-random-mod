@@ -2,6 +2,7 @@ package com.flying_8lack.random.main;
 
 import com.flying_8lack.random.items.potions.ModPotions;
 import com.flying_8lack.random.loot.ModLoot;
+import com.flying_8lack.random.tags.ModTags;
 import net.minecraft.network.chat.ChatType;
 import com.flying_8lack.random.main.ModData;
 import net.minecraft.network.chat.OutgoingChatMessage;
@@ -68,6 +69,8 @@ public class flying8lacksrandommod {
         CREATIVE_MODE_TABS.register(modEventBus);
 
         ModBlockEntity.BE.register(modEventBus);
+
+
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (flying8lacksrandommod) to respond directly to events.

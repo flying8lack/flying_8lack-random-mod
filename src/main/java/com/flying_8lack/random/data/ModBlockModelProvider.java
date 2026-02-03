@@ -16,7 +16,7 @@ public class ModBlockModelProvider extends BlockModelProvider {
     @Override
     protected void registerModels() {
 
-
+        this.crop("fig_plant_block", ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_side"));
 
         this.cube("silly_miner",
                 ResourceLocation.fromNamespaceAndPath(MODID,"block/silly_miner_side"),

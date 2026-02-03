@@ -1,6 +1,8 @@
 package com.flying_8lack.random.world;
 
 import com.flying_8lack.random.main.ModEntity;
+import com.flying_8lack.random.tags.ModTags;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -8,6 +10,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.neoforged.neoforge.common.Tags;
@@ -35,10 +38,10 @@ public class ModBiomeModifier {
         var biome = c.lookup(Registries.BIOME);
 
         c.register(SPAWN_FIG_BM, new BiomeModifiers.AddSpawnsBiomeModifier(
-                biome.getOrThrow(Tags.Biomes.IS_PLAINS),
+                biome.getOrThrow(ModTags.Biomes.FIG_SPAWN_BIOMES),
                 List.of(
                         new MobSpawnSettings.SpawnerData(ModEntity.FIG_ENTITY.get(),
-                                16, 3, 7)
+                                64, 3, 7)
                 )
 
         ));

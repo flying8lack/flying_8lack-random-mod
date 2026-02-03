@@ -93,9 +93,9 @@ public class FigEntity extends PathfinderMob {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new MoveTowardsTargetGoal(this, 1.2f, 1.0f));
+        this.goalSelector.addGoal(2, new MoveTowardsTargetGoal(this, 1.4f, 1.0f));
         this.goalSelector.addGoal(1, new FireProjectileGoal(this, this::summonProjectile));
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2f, true));
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.33f, true));
         this.goalSelector.addGoal(2, new BreakDoorGoal(this, (p) -> true));
         this.goalSelector.addGoal(3, new RandomStrollGoal(this, 1.1f));
 

@@ -154,6 +154,9 @@ public class ModBus {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
         generator.addProvider(event.includeServer(),
+                new ModBiomeTagModifer(output,lookupProvider,existingFileHelper));
+
+        generator.addProvider(event.includeServer(),
                 new ModRecipeProvider(output, lookupProvider));
 
 

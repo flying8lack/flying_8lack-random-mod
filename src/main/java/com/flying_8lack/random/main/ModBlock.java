@@ -1,10 +1,12 @@
 package com.flying_8lack.random.main;
 
+import com.flying_8lack.random.blocks.FigPlantBlock;
 import com.flying_8lack.random.blocks.GhostDoorBlock;
 import com.flying_8lack.random.blocks.HElevatorBlock;
 import com.flying_8lack.random.blocks.SillyMinerBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -40,6 +42,10 @@ public class ModBlock {
                     .jumpFactor(1.8f)
                     .sound(SoundType.MUD)
                     .strength(1.8f)));
+
+    public static final DeferredBlock<Block> FIG_PLANT_BLOCK = registerBlock("fig_plant_block",
+            () -> new FigPlantBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT)
+                    .noOcclusion()));
 
     public static final DeferredBlock<Block> WALL_DOOR = registerBlock("wall_door",
             GhostDoorBlock::new);

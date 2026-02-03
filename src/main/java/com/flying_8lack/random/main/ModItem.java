@@ -1,7 +1,9 @@
 package com.flying_8lack.random.main;
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -13,9 +15,16 @@ import static com.flying_8lack.random.main.flying8lacksrandommod.MODID;
 
 public class ModItem {
 
+
+
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
 
+
+
     public static final DeferredItem<Item> SILLY_GLASS_SHARD = ITEMS.registerSimpleItem("silly_glass_shard");
+
+    public static final DeferredItem<Item> FIG_SEED = ITEMS.register("fig_seed",
+            () -> new ItemNameBlockItem(ModBlock.FIG_PLANT_BLOCK.get(),new Item.Properties()));
 
     public static final DeferredItem<Item> HARD_GUM = ITEMS.registerSimpleItem("hard_gum");
 

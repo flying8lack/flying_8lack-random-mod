@@ -1,5 +1,6 @@
-// 1.21.1	2026-01-23T01:41:05.2325978	Loot Tables
+// 1.21.1	2026-02-03T18:09:03.8064837	Loot Tables
 3972a7f01dd6962849664c339c782c64527bc512 data/flying8lacksrandommod/loot_table/blocks/fig_block.json
+5fe05c378eba1c36d22dc3084ae318bc215ddb09 data/flying8lacksrandommod/loot_table/blocks/fig_plant_block.json
 b0b9050931b0a0bfddba7f11a9e9ef593610e7e1 data/flying8lacksrandommod/loot_table/blocks/gum_ore.json
 1654ebf5cb47ad946b34edf3ba2f85b1f3199ca5 data/flying8lacksrandommod/loot_table/blocks/h_elevator.json
 614adf8d3acd1118ed45cc804b88d4abbe273575 data/flying8lacksrandommod/loot_table/blocks/silly_miner.json
