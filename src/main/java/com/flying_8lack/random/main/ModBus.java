@@ -16,8 +16,12 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Giant;
 import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.LargeFireball;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.ItemCost;
+import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -36,8 +40,11 @@ import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.village.VillagerTradesEvent;
+import net.neoforged.neoforge.event.village.WandererTradesEvent;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
@@ -142,6 +149,44 @@ public class ModBus {
 
 
         }
+    }
+
+    @SubscribeEvent
+    public static void villagerTrade (VillagerTradesEvent event){
+        if(event.getType() == VillagerProfession.FARMER){
+            event.getTrades().get(2).add( (entity, r) -> new MerchantOffer(
+                    new ItemCost(Items.DIAMOND, r.nextInt(3,5)),
+                    ModItem.FIG_SEED.toStack(),
+                    1,
+                    15,
+                    0.07f
+
+            ));
+        }
+
+    }
+
+    @SubscribeEvent
+    public static void villagerTrade (WandererTradesEvent event){
+        event.getGenericTrades().add((entity, r) -> new MerchantOffer(
+                new ItemCost(Items.DIAMOND, 2),
+                ModItem.FIG_SEED.toStack(),
+                3,
+                15,
+                0.2f
+
+        ));
+
+        event.getRareTrades().add((entity, r) -> new MerchantOffer(
+                new ItemCost(Items.DIAMOND, 1),
+                ModItem.FIG_SEED.toStack(),
+                3,
+                15,
+                0.2f
+
+        ));
+
+
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
