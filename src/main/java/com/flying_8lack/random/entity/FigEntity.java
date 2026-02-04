@@ -17,6 +17,7 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.TargetGoal;
+import net.minecraft.world.entity.animal.AbstractGolem;
 import net.minecraft.world.entity.animal.Animal;
 
 import net.minecraft.world.entity.monster.Enemy;
@@ -103,6 +104,8 @@ public class FigEntity extends PathfinderMob {
 
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Villager.class,
                 false));
+
+        this.targetSelector.addGoal(1, new AvoidEntityGoal<>(this, AbstractGolem.class, 9, 1.2 ,1.3));
     }
 
 

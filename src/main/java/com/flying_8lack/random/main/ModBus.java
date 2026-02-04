@@ -1,6 +1,7 @@
 package com.flying_8lack.random.main;
 
 import com.flying_8lack.random.data.*;
+import com.flying_8lack.random.entity.FigEntity;
 import com.flying_8lack.random.entity.goals.FireProjectileGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -9,13 +10,16 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.AbstractGolem;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Giant;
 import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.LargeFireball;
@@ -125,6 +129,12 @@ public class ModBus {
 
     @SubscribeEvent
     public static void modMobs (EntityJoinLevelEvent e){
+        if(e.getEntity() instanceof AbstractGolem g){
+            g.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(g, FigEntity.class, true, false));
+        }
+        if(e.getEntity() instanceof Villager v){
+            v.goalSelector.addGoal(0, new AvoidEntityGoal<>(v, FigEntity.class, 12, 1.2, 1.1));
+        }
         if(e.getEntity() instanceof Giant g){
             g.goalSelector.addGoal(0, new FireProjectileGoal(g,mob -> {
                 LivingEntity target = mob.getTarget();
@@ -143,10 +153,7 @@ public class ModBus {
             g.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(g, 1.0f));
             g.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(g, Player.class, false));
             g.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(g, AbstractVillager.class, false));
-            g.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(g, IronGolem.class, true));
-
-
-
+            g.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(g, IronGolem.class, true));
 
         }
     }

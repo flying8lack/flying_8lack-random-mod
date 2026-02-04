@@ -27,6 +27,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         withExistingParent(ModItem.FIG_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
+        this.basicItem(ModItem.FIG_SEED.get());
+
         this.basicItem(ModItem.HARD_GUM.get());
         this.basicItem(ModItem.SOFT_GUM.get());
 
