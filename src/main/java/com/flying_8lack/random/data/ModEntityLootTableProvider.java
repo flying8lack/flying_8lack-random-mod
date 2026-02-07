@@ -63,6 +63,15 @@ public class ModEntityLootTableProvider extends EntityLootSubProvider {
                 )
         );
 
+        add(ModEntity.LOLIPOP_ENTITY.get(), LootTable.lootTable()
+                .withPool(
+                        LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1.0f))
+                                .add(LootItem.lootTableItem(ModItem.HARD_GUM)
+                                )
+                )
+        );
+
 
 
 

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "flying8lacksrandommod:block/potion_mixer_block"
+  }
+}

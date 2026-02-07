@@ -1,9 +1,6 @@
 package com.flying_8lack.random.main;
 
-import com.flying_8lack.random.blocks.FigPlantBlock;
-import com.flying_8lack.random.blocks.GhostDoorBlock;
-import com.flying_8lack.random.blocks.HElevatorBlock;
-import com.flying_8lack.random.blocks.SillyMinerBlock;
+import com.flying_8lack.random.blocks.*;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -49,6 +46,9 @@ public class ModBlock {
 
     public static final DeferredBlock<Block> WALL_DOOR = registerBlock("wall_door",
             GhostDoorBlock::new);
+
+    public static final DeferredBlock<PotionMixerBlock> POTION_MIXER_BLOCK = registerBlock("potion_mixer_block",
+            () -> new PotionMixerBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BREWING_STAND)));
 
     private static <B extends Block> DeferredBlock<B> registerBlock(String name, Supplier<B> block){
         DeferredBlock<B> toReturn = BLOCKS.register(name, block);

@@ -2,6 +2,7 @@ package com.flying_8lack.random.main;
 
 import com.flying_8lack.random.data.*;
 import com.flying_8lack.random.entity.FigEntity;
+import com.flying_8lack.random.entity.LolipopEntity;
 import com.flying_8lack.random.entity.goals.FireProjectileGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -73,6 +74,12 @@ public class ModBus {
                 (be, d) -> be.getInv()
         );
 
+        event.registerBlockEntity(
+                Capabilities.ItemHandler.BLOCK,
+                ModBlockEntity.POTION_MIXER_BE.get(),
+                (be, d) -> be.inventory
+        );
+
     }
 
     @SubscribeEvent
@@ -105,6 +112,10 @@ public class ModBus {
 
     @SubscribeEvent
     public static void mobCreator (EntityAttributeCreationEvent e){
+
+        e.put(ModEntity.LOLIPOP_ENTITY.get(),
+                LolipopEntity.createAttribute().build());
+
         e.put(ModEntity.FIG_ENTITY.get(),
                 LivingEntity.createLivingAttributes().add(Attributes.MAX_HEALTH, 12.0f)
                         .add(Attributes.FOLLOW_RANGE, 36.0f)

@@ -1,6 +1,7 @@
 package com.flying_8lack.random.main;
 
 import com.flying_8lack.random.blockentity.HElevatorBlockEntity;
+import com.flying_8lack.random.blockentity.PotionMixerBlockEntity;
 import com.flying_8lack.random.blockentity.SillyMinerBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -25,6 +26,13 @@ public class ModBlockEntity {
             "silly_miner_be", () -> BlockEntityType.Builder.of(
                     SillyMinerBlockEntity::new,
                     ModBlock.SILLY_MINER.get()
+            ).build(null)
+    );
+
+    public static final Supplier<BlockEntityType<PotionMixerBlockEntity>> POTION_MIXER_BE = BE.register(
+            "potion_mixer_be", () -> BlockEntityType.Builder.of(
+                    PotionMixerBlockEntity::new,
+                    ModBlock.POTION_MIXER_BLOCK.get()
             ).build(null)
     );
 }

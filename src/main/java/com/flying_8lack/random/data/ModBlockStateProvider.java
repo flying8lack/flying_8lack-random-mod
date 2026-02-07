@@ -26,6 +26,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         this.simpleBlock(ModBlock.GUM_ORE.get());
         this.simpleBlock(ModBlock.FIG_BLOCK.get());
         this.simpleBlock(ModBlock.WALL_DOOR.get());
+        this.simpleBlock(ModBlock.POTION_MIXER_BLOCK.get());
 
 
         //this.simpleBlock();

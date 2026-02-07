@@ -1,6 +1,7 @@
 package com.flying_8lack.random.main;
 
 import com.flying_8lack.random.client.screen.HElevatorScreen;
+import com.flying_8lack.random.client.screen.PotionMixerScreen;
 import com.flying_8lack.random.client.screen.SillyMinerScreen;
 import com.flying_8lack.random.client.entity.model.FigEntityModel;
 import com.flying_8lack.random.client.entity.render.FigRenderer;
@@ -37,6 +38,9 @@ public class flying8lacksrandommodClient {
     static void regsiterMenuScreen(RegisterMenuScreensEvent event) {
         event.register(ModMenu.H_ELEVATOR_MENU.get(),
                 HElevatorScreen::new);
+
+        event.register(ModMenu.POTION_MIXER_MENU.get(),
+                PotionMixerScreen::new);
 
         event.register(ModMenu.SILLY_MINER_MENU.get(),
                 SillyMinerScreen::new);

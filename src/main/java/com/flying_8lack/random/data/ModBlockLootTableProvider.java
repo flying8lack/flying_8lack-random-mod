@@ -31,6 +31,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlock.FIG_BLOCK.get());
         dropSelf(ModBlock.SILLY_MINER.get());
         dropSelf(ModBlock.WALL_DOOR.get());
+        dropSelf(ModBlock.POTION_MIXER_BLOCK.get());
 
 
         add(ModBlock.FIG_PLANT_BLOCK.get(), createSingleItemTable(ModItem.FIG_SEED.get()));

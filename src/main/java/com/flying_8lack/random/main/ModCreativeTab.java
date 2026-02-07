@@ -23,6 +23,7 @@ public class ModCreativeTab {
                 //functional blocks
                 output.accept(ModBlock.WALL_DOOR);
                 output.accept(ModBlock.SILLY_MINER);
+                output.accept(ModBlock.POTION_MIXER_BLOCK);
                 output.accept(H_ELEVATOR.get());
 
                 //misc blocks
